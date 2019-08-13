@@ -16,7 +16,7 @@ public class Model {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long Id;
+	private int Id;
 	
 	@NotBlank(message = "* Model is required")
 	@Column(nullable = false, unique = true)

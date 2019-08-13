@@ -14,7 +14,7 @@ public class Style {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long Id;
+	private int Id;
 	
 	@NotBlank(message = "* Style is required")
 	@Column(nullable = false, unique = true)

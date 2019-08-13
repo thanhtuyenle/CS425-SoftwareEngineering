@@ -19,7 +19,7 @@ public class Make {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long Id;
+	private int Id;
 	
 	@NotBlank(message = "* Make is required")
 	@Column(nullable = false, unique = true)
