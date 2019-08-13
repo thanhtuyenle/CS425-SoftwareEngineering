@@ -40,6 +40,10 @@ public class Car {
 	private Make make;
 	
 	@ManyToOne
+	@JoinColumn(name = "model_id", nullable = false)
+	private Model model;
+	
+	@ManyToOne
 	@JoinColumn(name = "style_id", nullable = false)
 	private Style style;
 	
