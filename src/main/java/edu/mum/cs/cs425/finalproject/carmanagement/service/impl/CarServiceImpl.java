@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+
 import edu.mum.cs.cs425.finalproject.carmanagement.model.Car;
 import edu.mum.cs.cs425.finalproject.carmanagement.repository.CarRepository;
 import edu.mum.cs.cs425.finalproject.carmanagement.service.CarService;
@@ -15,7 +16,7 @@ import edu.mum.cs.cs425.finalproject.carmanagement.service.CarService;
 public class CarServiceImpl implements CarService {
 	
 	public static Integer NUM_EACH_PAGE = 10;
-	public static String ORDER_BY_COLUMN_NAME = "lastName";
+	public static String ORDER_BY_COLUMN_NAME = "year";
 
 	@Autowired
 	private CarRepository repository;	
@@ -31,4 +32,13 @@ public class CarServiceImpl implements CarService {
 		return repository.save(car);
 	}
 
+	@Override
+	public Car getCarById(Long carId) {
+		return repository.findById(carId).orElse(null);
+	}
+	
+	@Override
+	public void deleteCarById(Long carId) {
+		repository.deleteById(carId);		
+	}
 }

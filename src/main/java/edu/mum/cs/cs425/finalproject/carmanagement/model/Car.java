@@ -41,7 +41,7 @@ public class Car {
 	
 	@ManyToOne
 	@JoinColumn(name = "model_id", nullable = false)
-	private Model model;
+	private CarModel carModel;
 	
 	@ManyToOne
 	@JoinColumn(name = "style_id", nullable = false)

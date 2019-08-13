@@ -11,6 +11,8 @@ public interface CarService {
 	public abstract Car saveCar(Car car);
 //	public abstract Double getTotalYearlyIncome();
 	
-//	public abstract Citizen getCitizenById(Long productId);	
+	public abstract Car getCarById(Long carId);	
+	
+	public abstract void deleteCarById(Long carId);
 //	public abstract Optional<Citizen> findByCitizenNumber(Long productNumber);	
 }

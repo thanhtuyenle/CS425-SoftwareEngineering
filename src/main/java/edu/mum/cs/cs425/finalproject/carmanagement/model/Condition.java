@@ -16,8 +16,8 @@ public class Condition {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int Id;
 	
-	@NotBlank(message = "* Style is required")
+	@NotBlank(message = "* Condition is required")
 	@Column(nullable = false, unique = true)
-	private String condition;
+	private String conditionName;
 
 }

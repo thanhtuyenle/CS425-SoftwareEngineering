@@ -26,6 +26,6 @@ public class Make {
 	private String makeName;
 	
 	@OneToMany(mappedBy = "make", cascade = CascadeType.ALL)
-	List<Model> models = new ArrayList();
+	List<CarModel> carModels = new ArrayList();
 
 }
