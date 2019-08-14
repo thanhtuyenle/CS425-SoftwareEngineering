@@ -48,7 +48,7 @@ public class CarController {
 	@Autowired 
 	private StyleService styleService;
 	
-	@GetMapping(value = "/carmanagement/car/list")
+	@GetMapping(value = "/ecarmanagement/car/list")
 	public ModelAndView listCars(@RequestParam(defaultValue = "0") int pageno) {
 		ModelAndView modelAndView = new ModelAndView();
 		Page<Car> cars = this.carService.getAllCarsPaged(pageno);		
@@ -60,7 +60,7 @@ public class CarController {
         return modelAndView;
 	}
 	
-	@GetMapping(value = {"/carmanagement/car/new"})
+	@GetMapping(value = {"/ecarmanagement/car/new"})
     public String displayNewCarForm(Model model) {
         List<Condition> conditions = conditionService.getAllConditions();
         List<Make> makes = makeService.getAllMakes();
@@ -78,7 +78,7 @@ public class CarController {
 	
 	
 	
-	@PostMapping(value = {"/carmanagement/car/new"})
+	@PostMapping(value = {"/ecarmanagement/car/new"})
     public String addNewCar(@Valid @ModelAttribute("car") Car car,    								    		
                                      BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
@@ -95,10 +95,10 @@ public class CarController {
             return "car/new";
         }
         carService.saveCar(car);
-        return "redirect:/carmanagement/car/list";
+        return "redirect:/ecarmanagement/car/list";
     }
 	
-	@GetMapping(value = {"/carmanagement/car/edit/{carId}"})
+	@GetMapping(value = {"/ecarmanagement/car/edit/{carId}"})
     public String editCar(@PathVariable Long carId, Model model) {
         Car car = carService.getCarById(carId);
         if (car != null) {
@@ -116,7 +116,7 @@ public class CarController {
         return "car/list";
     }
 
-    @PostMapping(value = {"/carmanagement/car/edit"})
+    @PostMapping(value = {"/ecarmanagement/car/edit"})
     public String updateCar(@Valid @ModelAttribute("car") Car car,
                                 BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -132,17 +132,17 @@ public class CarController {
             return "car/edit";
         }
         car = carService.saveCar(car);
-        return "redirect:/carmanagement/car/list";
+        return "redirect:/ecarmanagement/car/list";
     }
     
-    @GetMapping(value = {"/carmanagement/car/delete/{carId}"})
+    @GetMapping(value = {"/ecarmanagement/car/delete/{carId}"})
     public String deleteCar(@PathVariable Long carId, Model model) {
     	carService.deleteCarById(carId);
-        return "redirect:/carmanagement/car/list";
+        return "redirect:/ecarmanagement/car/list";
     }
     
   //no paging
-//	@GetMapping(value = "/carmanagement/car/search")
+//	@GetMapping(value = "/ecarmanagement/car/search")
 //	public ModelAndView searchCars(@RequestParam String searchString) {
 //		ModelAndView modelAndView = new ModelAndView();
 //		List<Car> cars = this.carService.searchCars(searchString);
@@ -153,7 +153,7 @@ public class CarController {
 //        return modelAndView;
 //	}
 	
-//	@GetMapping(value = "/carmanagement/car/search")
+//	@GetMapping(value = "/ecarmanagement/car/search")
 //	public ModelAndView searchCars(@RequestParam(defaultValue = "0") int pageno, @RequestParam String searchString) {
 //		ModelAndView modelAndView = new ModelAndView();
 //		Page<Car> cars = this.carService.searchCarsPaged(pageno, searchString);

@@ -20,7 +20,7 @@
         <div>
             <span style="font-size: 2em; color: #32a5e7;">Cars in our System</span>
             <span style="float:right;">
-                <a class="btn btn-outline-success btn-lg" href="/carmanagement/car/new">Add New Car</a>
+                <a class="btn btn-outline-success btn-lg" href="/ecarmanagement/car/new">Add New Car</a>
             </span>
         </div>
         
@@ -47,7 +47,7 @@
                     
                     <th scope="row" th:text="${iterStat.count}"></th>
                     <td th:text="${car.make.makeName}"></td>
-                    <td th:text="${car.carModel.modelName}"></td>
+                    <td th:text="${car.carModel.carModelName}"></td>
                     <td th:text="${car.style.styleName}"></td>
                     <td th:text="${car.condition.conditionName}"></td>
                     <td th:text="${car.year}"></td>   
@@ -70,7 +70,7 @@
                     </li>
                     <li th:each="i : ${#numbers.sequence(1, cars.totalPages)}"
                         th:class="${currentPageNo}==${i-1}?'page-item active':'page-item'">
-                        <a th:href="@{/carmanagement/car/list(pageno=${i-1})}"
+                        <a th:href="@{/ecarmanagement/car/list(pageno=${i-1})}"
                            th:text="${i}" class = "page-link"></a>
                     </li>
                 </ul>

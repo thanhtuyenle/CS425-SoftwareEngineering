@@ -28,4 +28,33 @@ public class Make {
 	@OneToMany(mappedBy = "make", cascade = CascadeType.ALL)
 	List<CarModel> carModels = new ArrayList();
 
+	public Make() {
+		
+	}
+	public Make(@NotBlank(message = "* Make is required") String makeName, List<CarModel> carModels) {
+		super();
+		this.makeName = makeName;
+		this.carModels = carModels;
+	}
+	public int getId() {
+		return Id;
+	}
+	public void setId(int id) {
+		Id = id;
+	}
+	public String getMakeName() {
+		return makeName;
+	}
+	public void setMakeName(String makeName) {
+		this.makeName = makeName;
+	}
+	public List<CarModel> getCarModels() {
+		return carModels;
+	}
+	public void setCarModels(List<CarModel> carModels) {
+		this.carModels = carModels;
+	}
+	
+	
+
 }

@@ -11,98 +11,122 @@
     <link rel="icon" href="favicon.ico">
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.2/cerulean/bootstrap.min.css" rel="stylesheet" integrity="sha384-EmRcsPP774S9MOi4ywB+JXUWjYnBdyInMzG2XsC5siZEUpexqxOMJW358dCYEjPu" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" th:href="@{/css/master.css}">
-    <title>Wankanda DPR system - New Citizen Form</title>
+    <title>eCarManagement</title>
 </head>
 <body>
     
     <th:block layout:fragment="content">
         <div style="margin-bottom: 1em;">
-            <span style="font-size: 2em; color: #32a5e7;">New Citizen Registration Form</span>
+            <span style="font-size: 2em; color: #32a5e7;">New Car Registration Form</span>
         </div>
 
-        <form id="newCitizenForm" method="post" action="/publicrecord/citizen/new" th:object="${citizen}">
+        <form id="newCarForm" method="post" action="/ecarmanagement/car/new" th:object="${car}">
             <fieldset>
-                <input type="hidden" name="citizenId" th:value="${citizen.citizenId}"/>
+                <input type="hidden" name="carId" th:value="${car.Id}"/>
                 
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="form-group" style="margin-top: 1em;">
-		                    <label for="socialSecurityNumber">Social Security Number:</label>
-		                    <span th:if="${#fields.hasErrors('socialSecurityNumber')}" th:errors="*{socialSecurityNumber}"
+                        <div class="form-group">
+		                    <label for="make">Make:</label>
+		                    <span th:if="${#fields.hasErrors('make')}" th:errors="*{make}"
 		                          class="alert alert-danger"></span>
-		                    <input id="socialSecurityNumber" name="socialSecurityNumber" type="text" class="form-control" value=""
-		                           th:value="${citizen.socialSecurityNumber}" />
+		                    <select name="make" id="make" class="form-control" required="required" autofocus>
+		                        <option value="">Select a make</option>
+		                        <option th:each="make : ${makes}" th:value="${make.Id}" th:text="${make.makeName}"></option>
+		                    </select>
 		                </div>
-                    </div>
+                    </div> 
                     
                     <div class="col-md-6">
                         <div class="form-group">
-		                    <label for="state">State where born:</label>
-		                    <span th:if="${#fields.hasErrors('state')}" th:errors="*{state}"
+		                    <label for="carModel">Model:</label>
+		                    <span th:if="${#fields.hasErrors('carModel')}" th:errors="*{carModel}"
 		                          class="alert alert-danger"></span>
-		                    <select name="state" id="state" class="form-control" required="required" autofocus>
-		                        <option value="">Select a state</option>
-		                        <option th:each="state : ${states}" th:value="${state.stateId}" th:text="${state.stateCode}+' - '+${state.stateName}"></option>
+		                    <select name="carModel" id="carModel" class="form-control" required="required" autofocus>
+		                        <option value="">Select a Model</option>
+		                        <option th:each="carModel : ${carModels}" th:value="${carModel.Id}" th:text="${carModel.carModelName}"></option>
 		                    </select>
 		                </div>
                     </div>                     
                 </div>
                 
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="form-group">
-                                <label for="firstName">First Name:</label>
-                                <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
-                                      class="alert alert-danger"></span>
-                                <input tabindex="3" id="firstName" name="firstName" type="text" class="form-control" th:value="${citizen.firstName}"/>
-                            </div>
-                    </div>
+		                    <label for="style">Style:</label>
+		                    <span th:if="${#fields.hasErrors('style')}" th:errors="*{style}"
+		                          class="alert alert-danger"></span>
+		                    <select name="style" id="style" class="form-control" required="required" autofocus>
+		                        <option value="">Select a style</option>
+		                        <option th:each="style : ${styles}" th:value="${style.Id}" th:text="${style.styleName}"></option>
+		                    </select>
+		                </div>
+                    </div> 
                     
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="form-group">
-                                <label for="middleName">Middle Name:</label>                                
-                                <input tabindex="3" id="middleName" name="middleName" type="text" class="form-control" th:value="${citizen.middleName}"/>
-                            </div>
-                    </div>  
-                    
-                    <div class="col-md-4">
-                        <div class="form-group">
-                                <label for="lastName">Last Name:</label>
-                                <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
-                                      class="alert alert-danger"></span>
-                                <input tabindex="3" id="lastName" name="lastName" type="text" class="form-control" th:value="${citizen.lastName}"/>
-                            </div>
-                    </div>                
+		                    <label for="condition">Condition:</label>
+		                    <span th:if="${#fields.hasErrors('condition')}" th:errors="*{condition}"
+		                          class="alert alert-danger"></span>
+		                    <select name="condition" id="condition" class="form-control" required="required" autofocus>
+		                        <option value="">Select a condition</option>
+		                        <option th:each="condition : ${conditions}" th:value="${condition.Id}" th:text="${condition.conditionName}"></option>
+		                    </select>
+		                </div>
+                    </div>                 
                 </div>
                 
                 <div class="row">
+                	<div class="col-md-6">
+                        <div class="form-group">
+		                    <label for="year">Year:</label>
+		                    <span th:if="${#fields.hasErrors('year')}" th:errors="*{year}"
+		                          class="alert alert-danger"></span>
+		                    <select name="year" id="year" class="form-control" required="required" autofocus>
+		                        <option value="">Select a year</option>
+		                        <option th:each="year : ${#numbers.sequence(1990, #dates.year(#dates.createNow()))}" th:value="${year}" th:text="${year}"></option>
+		                    </select>
+		                </div>
+                    </div> 
                     <div class="col-md-6">
                         <div class="form-group">
-		                    <label for="yearlyIncome">Yearly Income:</label>
-		                    <span th:if="${#fields.hasErrors('yearlyIncome')}" th:errors="*{yearlyIncome}"
+		                    <label for="price">Price:</label>
+		                    <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
 		                          class="alert alert-danger"></span>
-		                    <input id="yearlyIncome" name="yearlyIncome" type="text" class="form-control" th:value="${citizen.yearlyIncome}" required="required">
+		                    <input id="price" name="price" type="text" class="form-control" th:value="${car.price}" required="required">
 		                </div>
                     </div>
                     
+                                        
+                </div>
+                
+                <div class="row">
+                	<div class="col-md-6">
+                        <div class="form-group">
+                            <label for="mileage">Mileage:</label>
+                            <span th:if="${#fields.hasErrors('mileage')}" th:errors="*{mileage}"
+                                  class="alert alert-danger"></span>
+                            <input id="mileage" name="mileage" type="text" class="form-control" th:value="${car.mileage}" required="required">
+                        </div>
+                    </div> 
+                    <!-- 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="dateOfBirth">Date Of Birth:</label>
-                            <span th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"
+                            <label for="imagePath">Upload image:</label>
+                            <span th:if="${#fields.hasErrors('imagePath')}" th:errors="*{imagePath}"
                                   class="alert alert-danger"></span>
-                            <input tabindex="7" id="dateOfBirth" name="dateOfBirth" type="date" class="form-control"
-                                   aria-describedby="dateOfBirthHelp" th:value="${citizen.dateOfBirth}"/>
-                            <small id="dateOfBirthHelp" class="form-text text-muted">Enter a valid Date</small>
+                            <input type="file" name="file" required="required" />
+                            <input id="imagePath" name="imagePath" type="text" class="form-control" th:value="${car.imagePath}" readonly = "true" required="required">
                         </div>
-                    </div>                     
+                    </div> 
+                    
+                     -->
                 </div>
                 
                 
-                
-                
                 <div style="float:right;">
-                    <a href="/publicrecord/citizen/list" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
-                    <button id="btnSubmit" type="submit" class="btn btn-outline-success">Register</button>
+                    <a href="/ecarmanagement/car/list" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
+                    <button id="btnSubmit" type="submit" class="btn btn-outline-success">Add Car</button>
                 </div>
             </fieldset>
         </form>

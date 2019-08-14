@@ -20,4 +20,26 @@ public class Style {
 	@Column(nullable = false, unique = true)
 	private String styleName;
 
+	public Style() {
+		
+	}
+	public Style(@NotBlank(message = "* Style is required") String styleName) {
+		super();
+		this.styleName = styleName;
+	}
+	public int getId() {
+		return Id;
+	}
+	public void setId(int id) {
+		Id = id;
+	}
+	public String getStyleName() {
+		return styleName;
+	}
+	public void setStyleName(String styleName) {
+		this.styleName = styleName;
+	}
+	
+	
+
 }

@@ -13,7 +13,7 @@ import edu.mum.cs.cs425.finalproject.carmanagement.service.CarModelService;
 @Service
 public class CarModelServiceImpl implements CarModelService{
 	
-	public static String ORDER_BY_COLUMN_NAME = "modelName";
+	public static String ORDER_BY_COLUMN_NAME = "carModelName";
 	
 	@Autowired
 	private CarModelRepository repository;
