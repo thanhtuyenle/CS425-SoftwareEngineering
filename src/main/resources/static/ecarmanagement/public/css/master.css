@@ -1,4 +1,4 @@
--- master.css --
+/*-- master.css --*/
 
 @charset "utf-8";
 html {
@@ -60,4 +60,9 @@ h3 {
 }
 .row .right-text {
     text-align: right;
+}
+.icon-user {
+    color: white;
+    font-size: 24px;
+    padding: 15px;
 }

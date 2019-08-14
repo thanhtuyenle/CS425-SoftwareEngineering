@@ -8,43 +8,43 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="">
     <meta name="author" content="Team5">
-    <link rel="icon" th:href="@{/images/car-icon.png}" >
+    <link rel="icon" th:href="@{/ecarmanagement/public/images/car-icon.png}" >
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.2/cerulean/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EmRcsPP774S9MOi4ywB+JXUWjYnBdyInMzG2XsC5siZEUpexqxOMJW358dCYEjPu" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/master.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/ecarmanagement/public/css/master.css}">
     <title>eCMS - Car Management System</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/carmanagement/home">eCMS <img class="display-inline-block display-lg-none icon-img"
-                                                                        th:src="@{/images/car-icon.png}" height="50px"></a>
+    <a class="navbar-brand" href="/ecarmanagement/home">eCMS <img class="display-inline-block display-lg-none icon-img"
+                                                                        th:src="@{/ecarmanagement/public/images/car-icon.png}" height="50px"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarColor02">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/carmanagement/dealer/list">Dealers</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/carmanagement/car/list">Cars</a>
-                    </li>
+<!--                    <li class="nav-item active">-->
+<!--                        <a class="nav-link" href="/ecarmanagement/dealer/list">Dealers</a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link" href="/ecarmanagement/car/list">Cars</a>-->
+<!--                    </li>-->
                     <li class="nav-item">
                         <a class="nav-link" href="#">About</a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
-                    <span style="color:#fff;padding-left: 2em; padding-right: 1em;">Welcome, Guest</span>
+                    <span class="fa fa-user icon-user"></span>
 <!--                    <a style="color: #ffffff; margin-right: 0em;" class="nav-link" href="#">John Doe</a>-->
 <!--                    <input class="form-control mr-sm-2" type="text" placeholder="Search">-->
-                    <a href="#" class="btn btn-secondary">Sign In</a>
+                    <a href="/ecarmanagement/login"  class="btn btn-secondary">Sign In</a>
                 </form>
             </div>
         </nav>
         <!--<nav class="navbar navbar-expand-lg navbar-dark bg-primary">-->
-<!--    <a style="padding-right: 2em;" class="navbar-brand" href="/carmanagement/home">eCMS <img class="display-inline-block display-lg-none icon-img"-->
+<!--    <a style="padding-right: 2em;" class="navbar-brand" href="/ecarmanagement/home">eCMS <img class="display-inline-block display-lg-none icon-img"-->
 <!--                                                                   th:src="@{/images/car-icon.png}" height="50px"></a>-->
 
 <!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"-->
@@ -55,12 +55,12 @@
 <!--    <div class="collapse navbar-collapse" id="navbarColor01">-->
 <!--        <ul class="navbar-nav mr-auto">-->
 <!--            <li class="nav-item" style="border-left: white 1px solid; padding-left: 2em; padding-right: 2em;">-->
-<!--                <a class="nav-link" href="/carmanagement/dearler/list">Dealers</a>-->
+<!--                <a class="nav-link" href="/ecarmanagement/dearler/list">Dealers</a>-->
 <!--            </li>-->
 <!--        </ul>-->
 <!--        <ul class="navbar-nav mr-auto">-->
 <!--            <li class="nav-item" style="border-left: white 1px solid; padding-left: 2em; padding-right: 2em;">-->
-<!--                <a class="nav-link" href="/carmanagement/car/list">Cars</a>-->
+<!--                <a class="nav-link" href="/ecarmanagement/car/list">Cars</a>-->
 <!--            </li>-->
 <!--        </ul>-->
 <!--        <form class="form-inline my-2 my-lg-0">-->
