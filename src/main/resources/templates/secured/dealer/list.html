@@ -11,11 +11,11 @@
         <div>
             <span style="font-size: 1.5em">List of All Registered Dealers</span>
             <span style="float:right;">
-                    <a class="btn btn-outline-primary btn-lg" href="/ecarmanagement/dealer/new">Register a New Dealer</a>
+                    <a class="btn btn-outline-primary btn-lg" href="/ecarmanagement/secured/dealer/new">Register a New Dealer</a>
                 </span>
         </div>
         <!-- Search panel -->
-        <form id="searchDealerForm" method="get" action="/ecarmanagement/dealer/search">
+        <form id="searchDealerForm" method="get" action="/ecarmanagement/secured/dealer/search">
             <div style="margin-top:1em;" class="row">
                 <div class="col-md-12">
                     <div class="input-group">
@@ -59,9 +59,9 @@
                 <td th:text="${dealer.address}"></td>
                 <td th:text="${dealer.website}"></td>
 
-                <td><a th:href="@{'/ecarmanagement/dealer/edit/{dealerId}'(dealerId=${dealer.dealerId})}">Edit</a></td>
+                <td><a th:href="@{'/ecarmanagement/secured/dealer/edit/{dealerId}'(dealerId=${dealer.dealerId})}">Edit</a></td>
                 <td>
-                    <a data-toggle="modal" data-target="#confirmDeleteDealerModal" th:href="@{'/ecarmanagement/dealer/delete/' + ${dealer.dealerId}}"
+                    <a data-toggle="modal" data-target="#confirmDeleteDealerModal" th:href="@{'/ecarmanagement/secured/dealer/delete/' + ${dealer.dealerId}}"
                        th:attr="data-target='#confirmDeleteDealerModal'+${dealer.dealerId}">
                                             <span class="glyphicon glyphicon-trash" data-toggle="tooltip"
                                                   data-placement="top" title="Delete"></span>Delete</a>
@@ -83,7 +83,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                <a th:href="@{'/ecarmanagement/dealer/delete/' + ${dealer.dealerId}}">
+                                <a th:href="@{'/ecarmanagement/secured/dealer/delete/' + ${dealer.dealerId}}">
                                     <button type="button" class="btn btn-primary">Yes</button>
                                 </a>
                             </div>
@@ -106,7 +106,7 @@
                 </li>
                 <li th:each="i : ${#numbers.sequence(1, dealers.totalPages)}"
                     th:class="${currentPageNo}==${i-1}?'page-item active':'page-item'">
-                    <a th:href="@{/ecarmanagement/dealer/list(pageno=${i-1})}"
+                    <a th:href="@{/ecarmanagement/secured/dealer/list(pageno=${i-1})}"
                        th:text="${i}" class = "page-link"></a>
                 </li>
             </ul>

@@ -21,7 +21,7 @@ public class DealerController {
     @Autowired
     private IDealerService dealerService;
 
-    @GetMapping(value={"/ecarmanagement/dealer/list"})
+    @GetMapping(value={"/ecarmanagement/secured/dealer/list"})
     public ModelAndView listDealers(@RequestParam(defaultValue = "0") int pageno) {
         ModelAndView mav = new ModelAndView();
         Page<Dealer> dealers = dealerService.getAllDealers(pageno);
@@ -29,18 +29,18 @@ public class DealerController {
         mav.addObject("dealersCount", dealers.getContent().size());
         mav.addObject("currentPageNo", pageno);
         mav.addObject("now", LocalDate.now());
-        mav.setViewName("dealer/list");
+        mav.setViewName("secured/dealer/list");
         return mav;
     }
 
-    @GetMapping(value={"/ecarmanagement/dealer/new"})
+    @GetMapping(value={"/ecarmanagement/secured/dealer/new"})
     public String newDealerForm(Model model) {
         model.addAttribute("dealer", new Dealer());
         model.addAttribute("now", LocalDate.now());
-        return "dealer/new";
+        return "secured/dealer/new";
     }
 
-    @PostMapping(value = {"/ecarmanagement/dealer/new"})
+    @PostMapping(value = {"/ecarmanagement/secured/dealer/new"})
     public String registerNewDealer(
             @Valid
             @ModelAttribute("dealer")
@@ -50,40 +50,40 @@ public class DealerController {
     ) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());
-            return "dealer/new";
+            return "secured/dealer/new";
         }
         dealerService.registerNewDealer(dealer);
-        return "redirect:/ecarmanagement/dealer/list";
+        return "redirect:/ecarmanagement/secured/dealer/list";
     }
 
-    @GetMapping(value = {"/ecarmanagement/dealer/edit/{dealerId}"})
+    @GetMapping(value = {"/ecarmanagement/secured/dealer/edit/{dealerId}"})
     public String editDealer(@PathVariable Long dealerId, Model model) {
         Dealer dealer = dealerService.getDealerById(dealerId);
         if (dealer != null) {
             model.addAttribute("dealer", dealer);
-            return "dealer/edit";
+            return "secured/dealer/edit";
         }
-        return "dealer/list";
+        return "secured/dealer/list";
     }
 
-    @PostMapping(value = {"/ecarmanagement/dealer/edit"})
+    @PostMapping(value = {"/ecarmanagement/secured/dealer/edit"})
     public String updateDealer(@Valid @ModelAttribute("dealer") Dealer dealer,
                                  BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());
-            return "dealer/edit";
+            return "secured/dealer/edit";
         }
         dealer = dealerService.saveDealer(dealer);
-        return "redirect:/ecarmanagement/dealer/list";
+        return "redirect:/ecarmanagement/secured/dealer/list";
     }
 
-    @GetMapping(value = {"/ecarmanagement/dealer/delete/{dealerId}"})
+    @GetMapping(value = {"/ecarmanagement/secured/dealer/delete/{dealerId}"})
     public String deleteDealer(@PathVariable Long dealerId, Model model) {
         dealerService.deleteDealerById(dealerId);
-        return "redirect:/ecarmanagement/dealer/list";
+        return "redirect:/ecarmanagement/secured/dealer/list";
     }
 
-    @RequestMapping(value = "/ecarmanagement/dealer/search", method = RequestMethod.GET)
+    @RequestMapping(value = "/ecarmanagement/secured/dealer/search", method = RequestMethod.GET)
     public ModelAndView searchDealers(@RequestParam(value = "searchString", required = false) String searchString, @RequestParam(defaultValue = "0") int pageno, Model model) {
         ModelAndView modelAndView = new ModelAndView();
         Page<Dealer> dealers = dealerService.searchDealers(searchString, pageno);
@@ -91,7 +91,7 @@ public class DealerController {
         modelAndView.addObject("searchString", searchString);
         modelAndView.addObject("dealersCount", dealers.getContent().size());
         modelAndView.addObject("currentPageNo", pageno);
-        modelAndView.setViewName("dealer/list");
+        modelAndView.setViewName("secured/dealer/list");
         return modelAndView;
     }
 }

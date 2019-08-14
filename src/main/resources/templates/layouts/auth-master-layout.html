@@ -26,8 +26,8 @@
 
     <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-            <a class="nav-link" href="/ecarmanagement/dealer/list">Dealers</a>
+            <li sec:authorize="hasRole('ROLE_DEALER')" class="nav-item active">
+            <a class="nav-link" href="/ecarmanagement/secured/dealer/list">Dealers</a>
             </li>
 <!--            <li class="nav-item">-->
 <!--                <a class="nav-link" href="/ecarmanagement/car/list">Cars</a>-->
@@ -38,8 +38,8 @@
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <span class="fa fa-user icon-user"></span>
-            <a style="color: #ffffff; margin-right: 0em;" class="nav-link" href="#">John Doe</a>
-<!--            <span style="color:#fff;">Welcome, </span><span sec:authentication="principal.username" style="color:#fff;border-right: white 0px solid; padding-left: 1em; padding-right: 1em;">Guest</span>-->
+<!--            <a style="color: #ffffff; margin-right: 0em;" class="nav-link" href="#">John Doe</a>-->
+            <span style="color:#fff;">Welcome, </span><span sec:authentication="principal.username" style="color:#fff;border-right: white 0px solid; padding-left: 1em; padding-right: 1em;">Guest</span>
             <a sec:authorize="isAuthenticated()" href="/ecarmanagement/logout" class="btn btn-secondary">Sign out</a>
         </form>
     </div>
