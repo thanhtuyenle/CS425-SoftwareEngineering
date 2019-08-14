@@ -1,24 +1,15 @@
 package edu.mum.cs.cs425.finalproject.carmanagement.service;
 
-import edu.mum.cs.cs425.finalproject.carmanagement.model.Dealer;
+
+import edu.mum.cs.cs425.finalproject.carmanagement.model.User;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface IDealerService {
-    public abstract List<Dealer> getAllDealers();
+public interface IUserService {
 
-    public abstract Page<Dealer> getAllDealers(int pageNo);
+    public abstract User getUserById(Integer userId);
+    public abstract void deleteUserById(Integer userId);
 
-    public abstract Dealer registerNewDealer(Dealer dealer);
-
-    public abstract Dealer getDealerById(Long dealerId);
-    public abstract Dealer saveDealer(Dealer dealer);
-
-    public abstract void deleteDealerById(Long dealerId);
-
-    public abstract Optional<Dealer> findByDealerNumber(String dealerNumber);
-
-    public abstract Page<Dealer> searchDealers(String searchString, int pageNo);
 }   

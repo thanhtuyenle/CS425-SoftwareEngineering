@@ -46,6 +46,23 @@ public class Dealer {
 
     private String website;
 
+
+
+    //modify start
+    @OneToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "userId", nullable = false)
+    //@OnDelete(action = OnDeleteAction.CASCADE)
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+    //modify end
+
     public Dealer(){
 
     }
