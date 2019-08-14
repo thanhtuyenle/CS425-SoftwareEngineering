@@ -39,14 +39,17 @@
             <li class="nav-item" style="border-left: white 1px solid; padding-left: 2em; padding-right: 2em;">
                 <a class="nav-link" href="/ecarmanagement/public/virtualtour">Virtual Tour</a>
             </li>
+            <li sec:authorize="hasRole('ROLE_DEALER')" class="nav-item" style="border-left: white 1px solid; padding-left: 2em;">
+                <a class="nav-link" href="/ecarmanagement/dealer/list">Dealers</a>
+            </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            <span sec:authorize="isAnonymous()" style="color:#fff;border-right: white 0px solid; padding-left: 2em; padding-right: 1em;">Welcome, Guest</span>
+            <!--                <span sec:authorize="isAnonymous()" style="color:#fff;border-right: white 0px solid; padding-left: 2em; padding-right: 1em;">Welcome, Guest</span>-->
             <!--<a style="color: #ffffff; margin-right: 0em;" class="nav-link" href="#">John Doe</a>-->
             <!--<input class="form-control mr-sm-2" type="text" placeholder="Search">-->
-            <a sec:authorize="isAnonymous()" href="/ecarmanagement/login" class="btn btn-secondary">Sign In</a>
+            <!--                <a sec:authorize="isAnonymous()" href="/ecarmanagement/login" class="btn btn-secondary">Sign In</a>-->
 
-            <!--                <span>Welcome, </span><span sec:authentication="principal.username" style="color:#fff;border-right: white 0px solid; padding-left: 2em; padding-right: 1em;">Guest</span>-->
+            <span style="color:#fff;">Welcome, </span><span sec:authentication="principal.username" style="color:#fff;border-right: white 0px solid; padding-left: 1em; padding-right: 1em;">Guest</span>
             <a sec:authorize="isAuthenticated()" href="/ecarmanagement/logout" class="btn btn-secondary">Sign out</a>
         </form>
     </div>
