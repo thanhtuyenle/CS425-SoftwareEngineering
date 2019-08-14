@@ -47,7 +47,29 @@ public class CarController {
 	
 	@Autowired 
 	private StyleService styleService;
-	
+
+    @GetMapping(value = "/ecarmanagement/car/detail")
+    public ModelAndView viewCarDetail(@RequestParam(defaultValue = "0") int pageno) {
+        ModelAndView modelAndView = new ModelAndView();
+        Page<Car> cars = this.carService.getAllCarsPaged(pageno);
+        modelAndView.addObject("cars", cars);
+        modelAndView.addObject("carsCount", cars.getTotalPages());
+        modelAndView.addObject("currentPageNo", pageno);
+        modelAndView.addObject("now", LocalDate.now());
+        modelAndView.setViewName("public/car/detail");
+        return modelAndView;
+    }
+    @GetMapping(value = "/ecarmanagement/car/search")
+    public ModelAndView searchCars(@RequestParam(defaultValue = "0") int pageno) {
+        ModelAndView modelAndView = new ModelAndView();
+        Page<Car> cars = this.carService.getAllCarsPaged(pageno);
+        modelAndView.addObject("cars", cars);
+        modelAndView.addObject("carsCount", cars.getTotalPages());
+        modelAndView.addObject("currentPageNo", pageno);
+        modelAndView.addObject("now", LocalDate.now());
+        modelAndView.setViewName("public/car/search");
+        return modelAndView;
+    }
 	@GetMapping(value = "/ecarmanagement/car/list")
 	public ModelAndView listCars(@RequestParam(defaultValue = "0") int pageno) {
 		ModelAndView modelAndView = new ModelAndView();
