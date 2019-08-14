@@ -1,26 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/master-layout}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/auth-master-layout}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="">
-    <meta name="author" content="O. Kalu">
-    <link rel="icon" href="favicon.ico">
-    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.2/cerulean/bootstrap.min.css" rel="stylesheet" integrity="sha384-EmRcsPP774S9MOi4ywB+JXUWjYnBdyInMzG2XsC5siZEUpexqxOMJW358dCYEjPu" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/master.css}">
-    <title>eCarManagement</title>
+    <title>eCMS - Edit Car</title>
 </head>
 <body>
-    
+
     <th:block layout:fragment="content">
         <div style="margin-bottom: 1em;">
-            <span style="font-size: 2em; color: #32a5e7;">New Car Registration Form</span>
+            <span style="font-size: 2em; color: #32a5e7;">Edit Car</span>
         </div>
 
-        <form id="newCarForm" method="post" action="/ecarmanagement/car/new" th:object="${car}" enctype="multipart/form-data">
+        <form id="editCarForm" method="post" action="/ecarmanagement/car/edit" th:object="${car}">
             <input type="hidden" th:attr="name=${_csrf.parameterName},value=${_csrf.token}"/>
             <fieldset>
                 <input type="hidden" name="carId" th:value="${car.Id}"/>
@@ -31,7 +22,7 @@
 		                    <label for="make">Make:</label>
 		                    <span th:if="${#fields.hasErrors('make')}" th:errors="*{make}"
 		                          class="alert alert-danger"></span>
-		                    <select name="make" id="make" class="form-control" required="required" autofocus>
+		                    <select th:field="*{make}" name="make" id="make" class="form-control" required="required" autofocus>
 		                        <option value="">Select a make</option>
 		                        <option th:each="make : ${makes}" th:value="${make.Id}" th:text="${make.makeName}"></option>
 		                    </select>
@@ -43,7 +34,7 @@
 		                    <label for="carModel">Model:</label>
 		                    <span th:if="${#fields.hasErrors('carModel')}" th:errors="*{carModel}"
 		                          class="alert alert-danger"></span>
-		                    <select name="carModel" id="carModel" class="form-control" required="required" autofocus>
+		                    <select th:field="*{carModel}" name="carModel" id="carModel" class="form-control" required="required" autofocus>
 		                        <option value="">Select a Model</option>
 		                        <option th:each="carModel : ${carModels}" th:value="${carModel.Id}" th:text="${carModel.carModelName}"></option>
 		                    </select>
@@ -57,7 +48,7 @@
 		                    <label for="style">Style:</label>
 		                    <span th:if="${#fields.hasErrors('style')}" th:errors="*{style}"
 		                          class="alert alert-danger"></span>
-		                    <select name="style" id="style" class="form-control" required="required" autofocus>
+		                    <select th:field="*{style}" name="style" id="style" class="form-control" required="required" autofocus>
 		                        <option value="">Select a style</option>
 		                        <option th:each="style : ${styles}" th:value="${style.Id}" th:text="${style.styleName}"></option>
 		                    </select>
@@ -69,7 +60,7 @@
 		                    <label for="condition">Condition:</label>
 		                    <span th:if="${#fields.hasErrors('condition')}" th:errors="*{condition}"
 		                          class="alert alert-danger"></span>
-		                    <select name="condition" id="condition" class="form-control" required="required" autofocus>
+		                    <select th:field="*{condition}" name="condition" id="condition" class="form-control" required="required" autofocus>
 		                        <option value="">Select a condition</option>
 		                        <option th:each="condition : ${conditions}" th:value="${condition.Id}" th:text="${condition.conditionName}"></option>
 		                    </select>
@@ -83,9 +74,10 @@
 		                    <label for="year">Year:</label>
 		                    <span th:if="${#fields.hasErrors('year')}" th:errors="*{year}"
 		                          class="alert alert-danger"></span>
-		                    <select name="year" id="year" class="form-control" required="required" autofocus>
+		                    <select  name="year" id="year" class="form-control" required="required" autofocus>
 		                        <option value="">Select a year</option>
-		                        <option th:each="year : ${#numbers.sequence(1990, #dates.year(#dates.createNow()))}" th:value="${year}" th:text="${year}"></option>
+<!-- 		                        <option th:each="year : ${#numbers.sequence(1990, #dates.year(#dates.createNow()))}" th:value="${year}" th:text="${year}"></option> -->
+								<option th:each="year : ${years}" th:value="${year}" th:text="${year}"></option>
 		                    </select>
 		                </div>
                     </div> 
@@ -121,17 +113,15 @@
                     </div> 
                     
                     
-                </div>
-                
-                
+                </div>  
+               
                 <div style="float:right;">
                     <a href="/ecarmanagement/car/list" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
-                    <button id="btnSubmit" type="submit" class="btn btn-outline-success">Add Car</button>
+                    <button id="btnSubmit" type="submit" class="btn btn-outline-success">Update Car</button>
                 </div>
             </fieldset>
         </form>
     </th:block>
 
-    
 </body>
 </html>

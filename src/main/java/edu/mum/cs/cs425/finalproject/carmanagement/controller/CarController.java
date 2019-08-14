@@ -1,8 +1,12 @@
 package edu.mum.cs.cs425.finalproject.carmanagement.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -71,6 +76,7 @@ public class CarController {
         model.addAttribute("makes", makes);  
         model.addAttribute("carModels", carModels);  
         model.addAttribute("styles", styles);  
+        model.addAttribute("years", carService.getYears());  
         model.addAttribute("now", LocalDate.now());       
         
         return "secured/car/new";
@@ -79,7 +85,7 @@ public class CarController {
 	
 	
 	@PostMapping(value = {"/ecarmanagement/car/new"})
-    public String addNewCar(@Valid @ModelAttribute("car") Car car,    								    		
+    public String addNewCar(HttpServletRequest request, @RequestParam("carImg") MultipartFile carImg, @Valid @ModelAttribute("car") Car car,    								    		
                                      BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());
@@ -91,9 +97,13 @@ public class CarController {
             model.addAttribute("makes", makes);  
             model.addAttribute("carModels", carModels);  
             model.addAttribute("styles", styles);  
+            model.addAttribute("years", carService.getYears());
             model.addAttribute("now", LocalDate.now());  
             return "secured/car/new";
         }
+		String imgPath = doUpload(request, carImg);
+		if(imgPath != null)
+			car.setImagePath(imgPath);
         carService.saveCar(car);
         return "redirect:/ecarmanagement/car/list";
     }
@@ -111,6 +121,7 @@ public class CarController {
             model.addAttribute("makes", makes);  
             model.addAttribute("carModels", carModels);  
             model.addAttribute("styles", styles); 
+            model.addAttribute("years", carService.getYears());
             return "secured/car/edit";
         }
         return "secured/car/list";
@@ -129,6 +140,7 @@ public class CarController {
             model.addAttribute("makes", makes);  
             model.addAttribute("carModels", carModels);  
             model.addAttribute("styles", styles); 
+            model.addAttribute("years", carService.getYears());
             return "secured/car/edit";
         }
         car = carService.saveCar(car);
@@ -164,5 +176,38 @@ public class CarController {
 //        modelAndView.setViewName("car/list");
 //        return modelAndView;
 //	}
+    
+    private String doUpload(HttpServletRequest request, MultipartFile carImg) {
+         
+         // Root Directory. 
+		String reletiveFolder = File.separator + "upload";
+		String uploadRootPath = request.getServletContext().getRealPath(reletiveFolder);
+         
+    
+         File uploadRootDir = new File(uploadRootPath);
+         // Create directory if it not exists.
+         if (!uploadRootDir.exists()) {
+            uploadRootDir.mkdirs();
+         }        
+    
+        //carImg           
+        String fileName = carImg.getOriginalFilename();
+        String imgPath = null;
+        if (fileName != null && fileName.length() > 0) {
+           try {
+        	  String filePath = uploadRootDir.getAbsolutePath() + File.separator + fileName;
+              // Create the file at server
+              File serverFile = new File(filePath);
+
+              BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+              stream.write(carImg.getBytes());
+              stream.close();
+              imgPath = reletiveFolder + File.separator + fileName;
+           } catch (Exception e) {              
+           }
+        }     
+     
+        return imgPath;
+    }    
 
 }
