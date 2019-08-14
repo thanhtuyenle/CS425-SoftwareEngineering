@@ -24,23 +24,72 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarColor02">
-                <ul class="navbar-nav mr-auto">
-<!--                    <li class="nav-item active">-->
-<!--                        <a class="nav-link" href="/ecarmanagement/dealer/list">Dealers</a>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item">-->
-<!--                        <a class="nav-link" href="/ecarmanagement/car/list">Cars</a>-->
-<!--                    </li>-->
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <span class="fa fa-user icon-user"></span>
-<!--                    <a style="color: #ffffff; margin-right: 0em;" class="nav-link" href="#">John Doe</a>-->
-<!--                    <input class="form-control mr-sm-2" type="text" placeholder="Search">-->
-                    <a href="/ecarmanagement/login"  class="btn btn-secondary">Sign In</a>
-                </form>
+                <div class="navbar-nav mr-auto">
+                    <ul >
+                        <!--                    <li class="nav-item active">-->
+                        <!--                        <a class="nav-link" href="/ecarmanagement/dealer/list">Dealers</a>-->
+                        <!--                    </li>-->
+                        <!--                    <li class="nav-item">-->
+                        <!--                        <a class="nav-link" href="/ecarmanagement/car/list">Cars</a>-->
+                        <!--                    </li>-->
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About</a>
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0 user-dropdown-bar">
+                        <a data-toggle="collapse" href="#collapseMenu" role="button" aria-expanded="false" aria-controls="collapseMenu">
+                            <span class="fa fa-user icon-user"></span><span class="caret"></span>
+                        </a>
+                        <div class="collapse user-popup" id="collapseMenu">
+                            <!--                        <div class="card card-body">-->
+                            <!--                            <div class="arrow" style="left: 6.53076%;"></div>-->
+                            <div >
+                                <ul class="nav dropdown-menu">
+                                    <li>
+                                        <a href="/ecarmanagement/car/favorite" class="btn btn-link" >My Saved Cars (0)</a>
+                                    </li>
+                                    <li>
+                                        <a href="/ecarmanagement/login" class="btn btn-outline-primary btn-same-width" >Sign In</a>
+                                    </li>
+                                    <li>
+                                        <a href="/ecarmanagement/signup" class="btn btn-outline-info btn-same-width" >Sign Up</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--                        </div>-->
+                        </div>
+                        <!--                    <span class="fa fa-user icon-user"></span>-->
+                        <!--                    <div id="header-badge-popover-menu" role="tooltip" class="popover-menu fade in popover bottom" style="display: block; top: 38px; left: 0px;">-->
+                        <!--                        <div class="arrow" style="left: 6.53076%;"></div>-->
+                        <!--                        <div class="popover-content">-->
+                        <!--                            <ul class="nav">-->
+                        <!--                                <li>-->
+                        <!--                                    <a class="disabled row display-block link-unstyled" role="button">-->
+                        <!--                                        <span class="col-xs-2 text-right">-->
+                        <!--                                            <span class="fa fa-car icon-user"></span>-->
+                        <!--                                        </span>-->
+                        <!--                                        <span class="col-xs-10 text-left">-->
+                        <!--                                            My Saved Cars (0)</span>-->
+                        <!--                                    </a>-->
+                        <!--                                </li>-->
+                        <!--                            </ul>-->
+                        <!--                            <hr class="margin-vertical-1">-->
+                        <!--                            <ul class="nav">-->
+                        <!--                                <li>-->
+                        <!--                                    <a href="/ecarmanagement/login" type="button" class="margin-top-2 btn btn-primary btn-block ae-button" >Sign In</a>-->
+                        <!--                                </li>-->
+                        <!--                                <li>-->
+                        <!--                                    <a href="/ecarmanagement/signup" class="margin-top-2 btn btn-default btn-block ae-button" >Sign Up</a>-->
+                        <!--                                </li>-->
+                        <!--                            </ul>-->
+                        <!--                        </div>-->
+                        <!--                    </div>-->
+                        <!--                    <a style="color: #ffffff; margin-right: 0em;" class="nav-link" href="#">John Doe</a>-->
+                        <!--                    <input class="form-control mr-sm-2" type="text" placeholder="Search">-->
+                        <!--                    <a href="/ecarmanagement/login"  class="btn btn-secondary">Sign In</a>-->
+                        <!--                    <a href="/ecarmanagement/signup"  class="btn btn-secondary">Sign Up</a>-->
+                    </form>
+                </div>
             </div>
         </nav>
         <!--<nav class="navbar navbar-expand-lg navbar-dark bg-primary">-->

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/master-layout}">
+<head>
+    <title>eCMS - Search Cars for Sale</title>
+</head>
+<body>
+
+<!--Thymeleaf placeholder for the page Content-->
+<th:block layout:fragment="content">
+    <!--        <h3>Welcome to the eCMS - Car Management System</h3>-->
+    <!--        <hr/>-->
+    <div class="card bottom-space">
+        <div class="row no-gutters">
+            <div class="col-auto">
+                <img th:src="" class="img-fluid" alt="">
+            </div>
+            <div class="col">
+                <div class="card-block px-2">
+                    <h4 class="card-title">${product.name}</h4>
+                    <p class="card-text">
+                        <th:if test="${(product.price) < 15}">
+                            <h5>Price: <span class="sale-price">$${product.price}</span> </h5>
+                        </th:if>
+                        <th:if test="${(product.price) >= 15}">
+                            <h5>Price: <span class="">$${product.price}</span> </h5>
+                        </th:if>
+                        Qty: <span class="icon-reduce">&minus;</span><input type="number" class="qty-input" value="${qty=0}" /><span class="icon-add">&plus;</span>
+                    </p>
+                    <button type="button" id="${product.id}" class="btn btn-primary">
+                        <span class="fa fa-heart"></span>Save car</button>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer w-100 text-muted">
+            In Stock
+        </div>
+    </div>
+</th:block>
+<!--End placeholder-->
+
+</body>
+</html>
