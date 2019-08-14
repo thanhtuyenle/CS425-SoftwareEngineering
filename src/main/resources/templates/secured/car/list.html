@@ -20,7 +20,7 @@
         <div>
             <span style="font-size: 2em; color: #32a5e7;">Cars in our System</span>
             <span style="float:right;">
-                <a class="btn btn-outline-success btn-lg" href="/ecarmanagement/car/new">Add New Car</a>
+                <a class="btn btn-outline-success btn-lg" href="/ecarmanagement/secured/car/new">Add New Car</a>
             </span>
         </div>
         
@@ -58,9 +58,9 @@
                     <td th:text="${car.mileage}"></td>
                     
                     
-                    <td><a th:href="@{'/ecarmanagement/car/edit/{carId}'(carId=${car.Id})}">Edit</a></td>
+                    <td><a th:href="@{'/ecarmanagement/secured/car/edit/{carId}'(carId=${car.Id})}">Edit</a></td>
                     <td>                        
-                        <a data-toggle="modal" th:href="@{'/ecarmanagement/car/delete/' + ${car.Id}}" th:attr="data-target='#confirmDeleteCarModal'+${car.Id}">Delete</a>
+                        <a data-toggle="modal" th:href="@{'/ecarmanagement/secured/car/delete/' + ${car.Id}}" th:attr="data-target='#confirmDeleteCarModal'+${car.Id}">Delete</a>
 							
                     </td>                    
                     
@@ -79,7 +79,7 @@
 				                </div>
 				                <div class="modal-footer">
 				                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-				                    <a th:href="@{'/ecarmanagement/car/delete/' + ${car.Id}}">
+				                    <a th:href="@{'/ecarmanagement/secured/car/delete/' + ${car.Id}}">
 				                    	<button type="button" class="btn btn-primary">Yes</button>
 				                    </a>
 				                </div>
@@ -102,7 +102,7 @@
                     </li>
                     <li th:each="i : ${#numbers.sequence(1, cars.totalPages)}"
                         th:class="${currentPageNo}==${i-1}?'page-item active':'page-item'">
-                        <a th:href="@{/ecarmanagement/car/list(pageno=${i-1})}"
+                        <a th:href="@{/ecarmanagement/secured/car/list(pageno=${i-1})}"
                            th:text="${i}" class = "page-link"></a>
                     </li>
                 </ul>
