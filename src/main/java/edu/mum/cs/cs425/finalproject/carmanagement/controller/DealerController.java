@@ -1,7 +1,9 @@
 package edu.mum.cs.cs425.finalproject.carmanagement.controller;
 
 import edu.mum.cs.cs425.finalproject.carmanagement.model.Dealer;
+import edu.mum.cs.cs425.finalproject.carmanagement.model.User;
 import edu.mum.cs.cs425.finalproject.carmanagement.service.IDealerService;
+import edu.mum.cs.cs425.finalproject.carmanagement.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,9 @@ public class DealerController {
 
     @Autowired
     private IDealerService dealerService;
+
+    @Autowired
+    private IUserService userService;
 
     @GetMapping(value={"/ecarmanagement/secured/dealer/list"})
     public ModelAndView listDealers(@RequestParam(defaultValue = "0") int pageno) {
@@ -68,18 +73,27 @@ public class DealerController {
 
     @PostMapping(value = {"/ecarmanagement/secured/dealer/edit"})
     public String updateDealer(@Valid @ModelAttribute("dealer") Dealer dealer,
+                               @RequestParam(defaultValue = "0") Integer userId,
                                  BindingResult bindingResult, Model model) {
+        User user = userService.getUserById(userId);
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());
             return "secured/dealer/edit";
         }
+        dealer.setUser(user);
         dealer = dealerService.saveDealer(dealer);
         return "redirect:/ecarmanagement/secured/dealer/list";
     }
 
     @GetMapping(value = {"/ecarmanagement/secured/dealer/delete/{dealerId}"})
     public String deleteDealer(@PathVariable Long dealerId, Model model) {
-        dealerService.deleteDealerById(dealerId);
+        Dealer dealer = dealerService.getDealerById(dealerId);
+        if(dealer.getUser().getId() != null) {
+            userService.deleteUserById(dealer.getUser().getId());
+        }
+        else {
+            dealerService.deleteDealerById(dealerId);
+        }
         return "redirect:/ecarmanagement/secured/dealer/list";
     }
 

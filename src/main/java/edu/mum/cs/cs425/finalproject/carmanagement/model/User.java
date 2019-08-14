@@ -46,6 +46,35 @@ public class User {
             inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")})
     private List<Role> roles;
 
+
+
+    //modify start
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Dealer dealer;
+
+    public User(){
+
+    }
+    public User(@NotBlank(message = "* First Name is required") String firstname, String middlename, @NotBlank(message = "* Last Name is required") String lastname, @NotBlank(message = "* Username is required") String username, @NotBlank(message = "* Email is required") @Email(message = "{errors.invalid_email}") String email, @NotBlank(message = "* Password is required") @Size(min = 8) String password, List<Role> roles) {
+        this.firstname = firstname;
+        this.middlename = middlename;
+        this.lastname = lastname;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+    }
+
+    public Dealer getDealer() {
+        return dealer;
+    }
+
+    public void setDealer(Dealer dealer) {
+        this.dealer = dealer;
+    }
+
+    //modify end
+
     public Integer getId()
     {
         return id;
@@ -70,7 +99,7 @@ public class User {
     {
         this.middlename = middlename;
     }
-    public String getLastnamename()
+    public String getLastname()
     {
         return lastname;
     }
