@@ -21,7 +21,7 @@ public class DealerController {
     @Autowired
     private IDealerService dealerService;
 
-    @GetMapping(value={"/carmanagement/dealer/list"})
+    @GetMapping(value={"/ecarmanagement/dealer/list"})
     public ModelAndView listDealers(@RequestParam(defaultValue = "0") int pageno) {
         ModelAndView mav = new ModelAndView();
         Page<Dealer> dealers = dealerService.getAllDealers(pageno);
@@ -33,14 +33,14 @@ public class DealerController {
         return mav;
     }
 
-    @GetMapping(value={"/carmanagement/dealer/new"})
+    @GetMapping(value={"/ecarmanagement/dealer/new"})
     public String newDealerForm(Model model) {
         model.addAttribute("dealer", new Dealer());
         model.addAttribute("now", LocalDate.now());
         return "dealer/new";
     }
 
-    @PostMapping(value = {"/carmanagement/dealer/new"})
+    @PostMapping(value = {"/ecarmanagement/dealer/new"})
     public String registerNewDealer(
             @Valid
             @ModelAttribute("dealer")
@@ -53,10 +53,10 @@ public class DealerController {
             return "dealer/new";
         }
         dealerService.registerNewDealer(dealer);
-        return "redirect:/carmanagement/dealer/list";
+        return "redirect:/ecarmanagement/dealer/list";
     }
 
-    @GetMapping(value = {"/carmanagement/dealer/edit/{dealerId}"})
+    @GetMapping(value = {"/ecarmanagement/dealer/edit/{dealerId}"})
     public String editDealer(@PathVariable Long dealerId, Model model) {
         Dealer dealer = dealerService.getDealerById(dealerId);
         if (dealer != null) {
@@ -66,7 +66,7 @@ public class DealerController {
         return "dealer/list";
     }
 
-    @PostMapping(value = {"/carmanagement/dealer/edit"})
+    @PostMapping(value = {"/ecarmanagement/dealer/edit"})
     public String updateDealer(@Valid @ModelAttribute("dealer") Dealer dealer,
                                  BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -74,16 +74,16 @@ public class DealerController {
             return "dealer/edit";
         }
         dealer = dealerService.saveDealer(dealer);
-        return "redirect:/carmanagement/dealer/list";
+        return "redirect:/ecarmanagement/dealer/list";
     }
 
-    @GetMapping(value = {"/carmanagement/dealer/delete/{dealerId}"})
+    @GetMapping(value = {"/ecarmanagement/dealer/delete/{dealerId}"})
     public String deleteDealer(@PathVariable Long dealerId, Model model) {
         dealerService.deleteDealerById(dealerId);
-        return "redirect:/carmanagement/dealer/list";
+        return "redirect:/ecarmanagement/dealer/list";
     }
 
-    @RequestMapping(value = "/carmanagement/dealer/search", method = RequestMethod.GET)
+    @RequestMapping(value = "/ecarmanagement/dealer/search", method = RequestMethod.GET)
     public ModelAndView searchDealers(@RequestParam(value = "searchString", required = false) String searchString, @RequestParam(defaultValue = "0") int pageno, Model model) {
         ModelAndView modelAndView = new ModelAndView();
         Page<Dealer> dealers = dealerService.searchDealers(searchString, pageno);
