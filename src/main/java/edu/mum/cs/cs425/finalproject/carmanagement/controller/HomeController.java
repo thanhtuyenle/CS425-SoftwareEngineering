@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeController {
+
     @GetMapping(value = {"/ecarmanagement"})
     public String index() {
         return "public/home/index";

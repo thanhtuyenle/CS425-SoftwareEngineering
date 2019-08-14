@@ -27,11 +27,13 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
             <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item active">
+            <a class="nav-link" href="/ecarmanagement/car/list">Cars</a>
+            </li>
+            
+            <li sec:authorize="hasRole('ROLE_DEALER')" class="nav-item active">
             <a class="nav-link" href="/ecarmanagement/secured/dealer/list">Dealers</a>
             </li>
-<!--            <li class="nav-item">-->
-<!--                <a class="nav-link" href="/ecarmanagement/car/list">Cars</a>-->
-<!--            </li>-->
+
             <li class="nav-item">
                 <a class="nav-link" href="#">About</a>
             </li>
