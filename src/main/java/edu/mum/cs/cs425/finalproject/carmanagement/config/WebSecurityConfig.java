@@ -55,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/resources/**", "/ecarmanagement/public/**", "/webjars/**", "/assets/**").permitAll()
                 .antMatchers("/ecarmanagement", "/ecarmanagement/about").permitAll()
                 .antMatchers("/ecarmanagement/secured/car/**").hasRole("DEALER")
-                .antMatchers("/ecarmanagement/secured/dealer/**").hasRole("DEALER")
+                .antMatchers("/ecarmanagement/secured/dealer/**").hasRole("ADMIN")
                 .anyRequest().authenticated() 
                 .and()
                 .formLogin()
