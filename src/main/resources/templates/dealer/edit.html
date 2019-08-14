@@ -20,7 +20,7 @@
             <span style="font-size: 2em; color: #32a5e7;">Edit Dealer data with Dealer Number: [[${dealer.dealerNumber}]]</span>
         </div>
 
-        <form id="editDealerForm" method="post" action="/carmanagement/dealer/edit" th:object="${dealer}">
+        <form id="editDealerForm" method="post" action="/ecarmanagement/dealer/edit" th:object="${dealer}">
             <fieldset>
                 <input type="hidden" name="dealerId" th:value="${dealer.dealerId}"/>
                 <div class="row">
@@ -94,7 +94,7 @@
                     </div>
                 </div>
                 <div style="float:right;">
-                    <a href="/carmanagement/dealer/list" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
+                    <a href="/ecarmanagement/dealer/list" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
                     <button id="btnSubmit" type="submit" class="btn btn-outline-success">Update Dealer</button>
                 </div>
             </fieldset>
