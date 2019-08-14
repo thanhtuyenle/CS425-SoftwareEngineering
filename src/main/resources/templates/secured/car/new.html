@@ -21,6 +21,7 @@
         </div>
 
         <form id="newCarForm" method="post" action="/ecarmanagement/car/new" th:object="${car}">
+            <input type="hidden" th:attr="name=${_csrf.parameterName},value=${_csrf.token}"/>
             <fieldset>
                 <input type="hidden" name="carId" th:value="${car.Id}"/>
                 

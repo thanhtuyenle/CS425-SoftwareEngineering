@@ -56,7 +56,7 @@ public class CarController {
         modelAndView.addObject("carsCount", cars.getTotalPages());        
         modelAndView.addObject("currentPageNo", pageno); 
         modelAndView.addObject("now", LocalDate.now());
-        modelAndView.setViewName("car/list");
+        modelAndView.setViewName("secured/car/list");
         return modelAndView;
 	}
 	
@@ -73,7 +73,7 @@ public class CarController {
         model.addAttribute("styles", styles);  
         model.addAttribute("now", LocalDate.now());       
         
-        return "car/new";
+        return "secured/car/new";
     }
 	
 	
@@ -92,7 +92,7 @@ public class CarController {
             model.addAttribute("carModels", carModels);  
             model.addAttribute("styles", styles);  
             model.addAttribute("now", LocalDate.now());  
-            return "car/new";
+            return "secured/car/new";
         }
         carService.saveCar(car);
         return "redirect:/ecarmanagement/car/list";
@@ -111,9 +111,9 @@ public class CarController {
             model.addAttribute("makes", makes);  
             model.addAttribute("carModels", carModels);  
             model.addAttribute("styles", styles); 
-            return "car/edit";
+            return "secured/car/edit";
         }
-        return "car/list";
+        return "secured/car/list";
     }
 
     @PostMapping(value = {"/ecarmanagement/car/edit"})
@@ -129,7 +129,7 @@ public class CarController {
             model.addAttribute("makes", makes);  
             model.addAttribute("carModels", carModels);  
             model.addAttribute("styles", styles); 
-            return "car/edit";
+            return "secured/car/edit";
         }
         car = carService.saveCar(car);
         return "redirect:/ecarmanagement/car/list";
