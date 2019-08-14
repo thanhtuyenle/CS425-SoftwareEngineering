@@ -15,7 +15,7 @@ import javax.validation.Valid;
 import java.time.LocalDate;
 
 @Controller
-//@RequestMapping(value = "/carmanagement/dealer")
+//@RequestMapping(value = "/ecarmanagement/dealer")
 public class DealerController {
 
     @Autowired
