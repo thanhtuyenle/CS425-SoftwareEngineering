@@ -15,6 +15,7 @@
             <input type="hidden" th:attr="name=${_csrf.parameterName},value=${_csrf.token}"/>
             <fieldset>
                 <input type="hidden" name="dealerId" th:value="${dealer.dealerId}"/>
+                <input type="hidden" name="userId" th:value="${dealer.user.id}"/>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
