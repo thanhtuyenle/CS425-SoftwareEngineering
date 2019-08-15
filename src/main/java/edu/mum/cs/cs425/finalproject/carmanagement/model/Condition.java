@@ -14,7 +14,7 @@ public class Condition {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int Id;
+	private int conditionId;
 	
 	@NotBlank(message = "* Condition is required")
 	@Column(nullable = false, unique = true)
@@ -29,12 +29,14 @@ public class Condition {
 		this.conditionName = conditionName;
 	}
 
-	public int getId() {
-		return Id;
+	
+
+	public int getConditionId() {
+		return conditionId;
 	}
 
-	public void setId(int id) {
-		Id = id;
+	public void setConditionId(int conditionId) {
+		this.conditionId = conditionId;
 	}
 
 	public String getConditionName() {

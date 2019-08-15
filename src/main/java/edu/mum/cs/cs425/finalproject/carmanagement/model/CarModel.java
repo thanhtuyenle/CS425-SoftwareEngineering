@@ -16,7 +16,7 @@ public class CarModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int Id;
+	private int carModelId;
 	
 	@NotBlank(message = "* Model is required")
 	@Column(nullable = false, unique = true)
@@ -36,12 +36,14 @@ public class CarModel {
 		this.make = make;
 	}
 
-	public int getId() {
-		return Id;
+	
+
+	public int getCarModelId() {
+		return carModelId;
 	}
 
-	public void setId(int id) {
-		Id = id;
+	public void setCarModelId(int carModelId) {
+		this.carModelId = carModelId;
 	}
 
 	public String getCarModelName() {

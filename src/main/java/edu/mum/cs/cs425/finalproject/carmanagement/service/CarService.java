@@ -1,5 +1,7 @@
 package edu.mum.cs.cs425.finalproject.carmanagement.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 
 import edu.mum.cs.cs425.finalproject.carmanagement.model.Car;
@@ -15,4 +17,5 @@ public interface CarService {
 	
 	public abstract void deleteCarById(Long carId);
 //	public abstract Optional<Citizen> findByCitizenNumber(Long productNumber);	
+	public abstract List<Integer> getYears();
 }

@@ -17,7 +17,7 @@ public class Car {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long Id;
+	private long carId;
 	
 	@NotNull(message = "* Year is required")
 	@Column(nullable = false)
@@ -71,12 +71,14 @@ public class Car {
 		this.condition = condition;
 	}
 
-	public long getId() {
-		return Id;
+	
+
+	public long getCarId() {
+		return carId;
 	}
 
-	public void setId(long id) {
-		Id = id;
+	public void setCarId(long carId) {
+		this.carId = carId;
 	}
 
 	public int getYear() {
