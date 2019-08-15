@@ -1,4 +1,3 @@
--- CREATE SCHEMA `carmanagementdb` ;
 
 DROP TABLE `carmanagementdb`.`users_roles`;
 
