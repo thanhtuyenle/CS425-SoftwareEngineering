@@ -50,6 +50,7 @@
                     <th scope="col">Year</th>
                     <th scope="col">Price</th>  
                     <th scope="col">Mileage</th>
+                    <th scope="col">ZipCode</th>
                                                        
                     
                 </tr>
@@ -67,6 +68,7 @@
                     <td th:text="${car.year}"></td>   
                     <td th:text="${#numbers.formatCurrency(car.price)}"></td>
                     <td th:text="${car.mileage}"></td>
+                    <td th:text="${car.zipCode}"></td>
                     
                     
                     <td><a th:href="@{'/ecarmanagement/secured/car/edit/{carId}'(carId=${car.carId})}">Edit</a></td>
