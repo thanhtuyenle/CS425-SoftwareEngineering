@@ -60,13 +60,16 @@ public class CarController {
         return modelAndView;
     }
     @GetMapping(value = "/ecarmanagement/car/search")
-    public ModelAndView searchCars(@RequestParam(defaultValue = "0") int pageno) {
+    public ModelAndView searchCars(@RequestParam(defaultValue = "") int makeCode,
+                                   @RequestParam(defaultValue = "") int modelCode,
+                                   @RequestParam(defaultValue = "") String zip) {
         ModelAndView modelAndView = new ModelAndView();
-        Page<Car> cars = this.carService.getAllCarsPaged(pageno);
+        Make make = this.makeService.findMakeById(makeCode);
+        CarModel model = this.carModelService.findCarModelById(modelCode);
+        List<Car> cars = this.carService.searchCars(make, model, zip);
         modelAndView.addObject("cars", cars);
-        modelAndView.addObject("carsCount", cars.getTotalPages());
-        modelAndView.addObject("currentPageNo", pageno);
-        modelAndView.addObject("now", LocalDate.now());
+        modelAndView.addObject("make", make);
+        modelAndView.addObject("model", model);
         modelAndView.setViewName("public/car/search");
         return modelAndView;
     }

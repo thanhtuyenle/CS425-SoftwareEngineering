@@ -34,6 +34,8 @@ public class Car {
 //	@NotBlank(message = "* Image path is required")
 //	@Column(nullable = false)
 	private String imagePath;
+
+	private String zipCode;
 	
 	@ManyToOne
 	@JoinColumn(name = "make_id", nullable = false)

@@ -17,24 +17,26 @@
                         </div>
                         <div class="col-search-bar">
                             <div class="form-group">
-                                <select class="form-control" name="makeCodeListPlaceHolder"
+                                <select class="form-control" name="makeCode"
                                         id="makeCodeListPlaceHolderHONDA"
                                         aria-label="makeCodeListPlaceHolder"
                                 >
                                     <option selected="" value="">Any Make</option>
-                                    <optgroup label="Popular Makes">
-                                        <option value="ACURA">Acura</option>
-                                        <option value="AUDI">Audi</option>
-                                        <option value="BMW">BMW</option>
-                                        <option value="BUICK">Buick</option>
-                                        <option value="CAD">Cadillac</option>
-                                        <option value="CHEV">Chevrolet</option>
-                                        <option value="CHRY">Chrysler</option>
-                                        <option value="DODGE">Dodge</option>
-                                        <option value="FORD">Ford</option>
-                                        <option value="GENESIS">Genesis</option>
-                                        <option value="GMC">GMC</option>
-                                    </optgroup>
+                                    <option th:each="make : ${makes}" th:value="${make.Id}" th:text="${make.makeName}"></option>
+
+<!--                                    <optgroup label="Popular Makes">-->
+<!--                                        <option value="ACURA">Acura</option>-->
+<!--                                        <option value="AUDI">Audi</option>-->
+<!--                                        <option value="BMW">BMW</option>-->
+<!--                                        <option value="BUICK">Buick</option>-->
+<!--                                        <option value="CAD">Cadillac</option>-->
+<!--                                        <option value="CHEV">Chevrolet</option>-->
+<!--                                        <option value="CHRY">Chrysler</option>-->
+<!--                                        <option value="DODGE">Dodge</option>-->
+<!--                                        <option value="FORD">Ford</option>-->
+<!--                                        <option value="GENESIS">Genesis</option>-->
+<!--                                        <option value="GMC">GMC</option>-->
+<!--                                    </optgroup>-->
                                 </select>
                                 <span class="help-block">
                                     <div id="findyourcar-example-make" class="text-sm">
@@ -45,19 +47,21 @@
                         </div>
                         <div class="col-search-bar">
                             <div class="form-group">
-                                <select class="form-control" name="modelCodeListPlaceHolder"
+                                <select class="form-control" name="modelCode"
                                         id="modelCodeListPlaceHolder"
                                         aria-label="modelCodeListPlaceHolder" >
                                     <option selected="" value="">Any Model</option>
-                                    <optgroup label="Popular Models">
-                                        <option value="ACCORD">Accord</option>
-                                        <option value="CIVIC">Civic</option>
-                                        <option value="HONCLARITY">Clarity</option>
-                                        <option value="CRV">CR-V</option>
-                                        <option value="FIT">Fit</option>
-                                        <option value="HONHRV">HR-V</option>
-                                        <option value="INSIGHT">Insight</option>
-                                    </optgroup>
+                                    <option th:each="carModel : ${carModels}" th:value="${carModel.Id}" th:text="${carModel.carModelName}"></option>
+
+                                    <!--                                    <optgroup label="Popular Models">-->
+<!--                                        <option value="ACCORD">Accord</option>-->
+<!--                                        <option value="CIVIC">Civic</option>-->
+<!--                                        <option value="HONCLARITY">Clarity</option>-->
+<!--                                        <option value="CRV">CR-V</option>-->
+<!--                                        <option value="FIT">Fit</option>-->
+<!--                                        <option value="HONHRV">HR-V</option>-->
+<!--                                        <option value="INSIGHT">Insight</option>-->
+<!--                                    </optgroup>-->
                                 </select>
                                 <span class="help-block">
                                     <div id="findyourcar-example-model" class="text-sm">
@@ -70,7 +74,7 @@
                         <div class="col-search-bar">
                             <div class="form-group">
                                 <input type="tel" name="zip"
-                                       placeholder="ZIP Code" required="" class="form-control" id="zip52556" value="52556"
+                                       placeholder="ZIP Code" required="" class="form-control" value="52557"
                                        aria-label="ZIP Code" />
                             </div>
                         </div>

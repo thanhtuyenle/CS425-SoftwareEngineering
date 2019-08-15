@@ -17,7 +17,12 @@ public class MakeServiceImpl implements MakeService{
 	
 	@Autowired
 	private MakeRepository repository;
-	
+
+	@Override
+	public Make findMakeById(Integer id) {
+		return repository.findMakeByMakeId(id).orElse(null);
+	}
+
 	@Override
 	public List<Make> getAllMakes() {
 		return repository.findAll(Sort.by(ORDER_BY_COLUMN_NAME));

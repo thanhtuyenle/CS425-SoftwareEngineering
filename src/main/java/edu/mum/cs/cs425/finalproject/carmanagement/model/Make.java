@@ -19,7 +19,7 @@ public class Make {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int Id;
+	private int makeId;
 	
 	@NotBlank(message = "* Make is required")
 	@Column(nullable = false, unique = true)
@@ -37,10 +37,10 @@ public class Make {
 		this.carModels = carModels;
 	}
 	public int getId() {
-		return Id;
+		return makeId;
 	}
 	public void setId(int id) {
-		Id = id;
+		makeId = id;
 	}
 	public String getMakeName() {
 		return makeName;

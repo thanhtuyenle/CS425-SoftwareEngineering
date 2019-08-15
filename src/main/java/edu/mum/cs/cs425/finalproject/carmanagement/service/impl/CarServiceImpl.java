@@ -1,5 +1,8 @@
 package edu.mum.cs.cs425.finalproject.carmanagement.service.impl;
 
+import edu.mum.cs.cs425.finalproject.carmanagement.model.CarModel;
+import edu.mum.cs.cs425.finalproject.carmanagement.model.Make;
+import edu.mum.cs.cs425.finalproject.carmanagement.repository.MakeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,6 +14,8 @@ import edu.mum.cs.cs425.finalproject.carmanagement.model.Car;
 import edu.mum.cs.cs425.finalproject.carmanagement.repository.CarRepository;
 import edu.mum.cs.cs425.finalproject.carmanagement.service.CarService;
 
+import java.util.List;
+
 
 @Service
 public class CarServiceImpl implements CarService {
@@ -19,8 +24,13 @@ public class CarServiceImpl implements CarService {
 	public static String ORDER_BY_COLUMN_NAME = "year";
 
 	@Autowired
-	private CarRepository repository;	
-	
+	private CarRepository repository;
+
+	@Override
+	public List<Car> searchCars(Make make, CarModel model, String zipcode) {
+
+		return repository.findAllByMakeAndCarModel(make, model);
+	}
 
 	@Override
 	public Page<Car> getAllCarsPaged(int pageNo) {

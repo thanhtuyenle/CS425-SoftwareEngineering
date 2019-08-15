@@ -5,7 +5,10 @@ import org.springframework.stereotype.Repository;
 
 import edu.mum.cs.cs425.finalproject.carmanagement.model.CarModel;
 
+import java.util.Optional;
+
 @Repository
 public interface CarModelRepository extends JpaRepository<CarModel, Integer>{
-
+    Optional<CarModel> findCarModelByCarModelName(String name);
+    Optional<CarModel> findCarModelById(Integer id);
 }

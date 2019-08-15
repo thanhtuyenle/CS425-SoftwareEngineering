@@ -22,5 +22,10 @@ public class CarModelServiceImpl implements CarModelService{
 	public List<CarModel> getAllCarModels() {
 		return repository.findAll(Sort.by(ORDER_BY_COLUMN_NAME));
 	}
-	
+
+	@Override
+	public CarModel findCarModelById(Integer id) {
+		return repository.findCarModelById(id).orElse(null);
+	}
+
 }
