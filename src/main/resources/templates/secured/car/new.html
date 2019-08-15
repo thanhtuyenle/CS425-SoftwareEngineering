@@ -135,9 +135,19 @@
                     
                     
                 </div>
-                
-                
-                <div style="float:right;">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="zipCode">Zipcode:</label>
+                            <span th:if="${#fields.hasErrors('zipCode')}" th:errors="*{zipCode}"
+                                  class="alert alert-danger"></span>
+                            <input id="zipCode" name="zipCode" type="text" class="form-control" th:value="${car.zipCode}" required="required">
+                        </div>
+                    </div>
+                </div>
+
+                    <div style="float:right;">
                     <a href="/ecarmanagement/secured/car/list" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
                     <button id="btnSubmit" type="submit" class="btn btn-outline-success">Add Car</button>
                 </div>

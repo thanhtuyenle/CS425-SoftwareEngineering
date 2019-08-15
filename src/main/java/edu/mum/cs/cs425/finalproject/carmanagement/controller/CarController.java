@@ -83,7 +83,7 @@ public class CarController {
         return modelAndView;
     }
 
-    @GetMapping(value = {"/ecarmanagement/secured/car/save/{carId}"})
+    @GetMapping(value = {"/ecarmanagement/car/save/{carId}"})
     public String addFavoriteCar(@PathVariable Long carId, Model model) {
         Car car = carService.getCarById(carId);
         String username = securityService.getCurrentUserName();

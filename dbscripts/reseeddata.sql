@@ -73,7 +73,6 @@ VALUES ('20 Highway St., Fairfield', 'DL005', 'highway@mum.edu', 'Highway Store'
 INSERT INTO `carmanagementdb`.`dealers` (`address`, `dealer_number`, `email`, `name`, `password`, `phone_number`, `website`, `user_id`)
 VALUES ('10 Billards St., Fairfield', 'DL006', 'billards@mum.edu', 'Billards Store', 'dealer1234', '(641) 5555 4444', 'www.billards.com', '9');
 
---Customer
 INSERT INTO `carmanagementdb`.`customers` (`address`, `customer_number`, `email`, `name`, `password`, `phone_number`, `user_id`)
 VALUES ('2 New Jersey', 'CUS001', 'peter@mum.edu', 'Peter Store', 'test1234', '(641) 5555 9999', '10');
 
