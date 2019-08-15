@@ -19,9 +19,14 @@
     <th:block layout:fragment="content">
         <div>
             <span style="font-size: 2em; color: #32a5e7;">Cars in our System</span>
-            
+            <!-- 
             <div>
+            	<select name="make" id="make" class="form-control" required="required" autofocus>
+                    <option value="">Select a make</option>
+                    <option th:each="make : ${makes}" th:value="${make.makeId}" th:text="${make.makeName}"></option>
+                </select>
             </div>
+             -->
             <span style="float:right;">
                 <a class="btn btn-outline-success btn-lg" href="/ecarmanagement/secured/car/new">Add New Car</a>
             </span>
@@ -61,14 +66,14 @@
                     <td th:text="${car.mileage}"></td>
                     
                     
-                    <td><a th:href="@{'/ecarmanagement/secured/car/edit/{carId}'(carId=${car.Id})}">Edit</a></td>
+                    <td><a th:href="@{'/ecarmanagement/secured/car/edit/{carId}'(carId=${car.carId})}">Edit</a></td>
                     <td>                        
-                        <a data-toggle="modal" th:href="@{'/ecarmanagement/secured/car/delete/' + ${car.Id}}" th:attr="data-target='#confirmDeleteCarModal'+${car.Id}">Delete</a>
+                        <a data-toggle="modal" th:href="@{'/ecarmanagement/secured/car/delete/' + ${car.carId}}" th:attr="data-target='#confirmDeleteCarModal'+${car.carId}">Delete</a>
 							
                     </td>                    
                     
                     <!-- Modal -->				    
-				    <div class="modal fade" th:id="confirmDeleteCarModal+${car.Id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				    <div class="modal fade" th:id="confirmDeleteCarModal+${car.carId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 				        <div class="modal-dialog modal-dialog-centered" role="document">
 				            <div class="modal-content">
 				                <div class="modal-header">
@@ -82,7 +87,7 @@
 				                </div>
 				                <div class="modal-footer">
 				                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-				                    <a th:href="@{'/ecarmanagement/secured/car/delete/' + ${car.Id}}">
+				                    <a th:href="@{'/ecarmanagement/secured/car/delete/' + ${car.carId}}">
 				                    	<button type="button" class="btn btn-primary">Yes</button>
 				                    </a>
 				                </div>
