@@ -10,5 +10,5 @@ import java.util.Optional;
 @Repository
 public interface CarModelRepository extends JpaRepository<CarModel, Integer>{
     Optional<CarModel> findCarModelByCarModelName(String name);
-    Optional<CarModel> findCarModelById(Integer id);
+    Optional<CarModel> findCarModelByCarModelId(Integer id);
 }
