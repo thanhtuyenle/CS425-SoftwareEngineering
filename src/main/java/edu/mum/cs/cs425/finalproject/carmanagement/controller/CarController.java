@@ -9,6 +9,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import edu.mum.cs.cs425.finalproject.carmanagement.model.*;
+import edu.mum.cs.cs425.finalproject.carmanagement.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -21,19 +23,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
-
-import edu.mum.cs.cs425.finalproject.carmanagement.model.Car;
-import edu.mum.cs.cs425.finalproject.carmanagement.model.Condition;
-import edu.mum.cs.cs425.finalproject.carmanagement.model.Make;
-import edu.mum.cs.cs425.finalproject.carmanagement.model.CarModel;
-import edu.mum.cs.cs425.finalproject.carmanagement.model.Style;
-import edu.mum.cs.cs425.finalproject.carmanagement.service.CarService;
-import edu.mum.cs.cs425.finalproject.carmanagement.service.ConditionService;
-import edu.mum.cs.cs425.finalproject.carmanagement.service.MakeService;
-import edu.mum.cs.cs425.finalproject.carmanagement.service.SecurityService;
-import edu.mum.cs.cs425.finalproject.carmanagement.service.CarModelService;
-import edu.mum.cs.cs425.finalproject.carmanagement.service.StyleService;
 
 
 @Controller
@@ -54,6 +43,38 @@ public class CarController {
 	@Autowired 
 	private StyleService styleService;
 
+    @Autowired
+    private SecurityService securityService;
+
+    @Autowired
+    private CustomerService customerService;
+
+    @GetMapping(value = "/ecarmanagement/car/favorite")
+    public ModelAndView favoriteCars(@RequestParam(defaultValue = "0") int pageno) {
+        ModelAndView modelAndView = new ModelAndView();
+        String username = securityService.getCurrentUserName();
+        Customer customer = securityService.getCustomerByUserName(username);
+//        Page<Car> cars = this.carService.getAllCarsPaged(pageno);
+        List<Car> cars = customer.getSavedCars();
+        modelAndView.addObject("cars", cars);
+
+        modelAndView.addObject("carsCount", cars.size());
+//        modelAndView.addObject("currentPageNo", pageno);
+//        modelAndView.addObject("now", LocalDate.now());
+        modelAndView.setViewName("secured/car/favorite");
+        return modelAndView;
+    }
+
+    @GetMapping(value = {"/ecarmanagement/secured/car/save/{carId}"})
+    public String addFavoriteCar(@PathVariable Long carId, Model model) {
+        Car car = carService.getCarById(carId);
+        String username = securityService.getCurrentUserName();
+        Customer customer = securityService.getCustomerByUserName(username);
+        customer.addFavoriteCar(car);
+        customerService.saveCustomer(customer);
+        return "redirect:/ecarmanagement/car/detail/"+carId;
+    }
+
     @GetMapping(value = "/ecarmanagement/car/detail/{carId}")
     public String viewCarDetail(@PathVariable Long carId, Model model) {
         Car car = carService.getCarById(carId);
@@ -68,7 +89,12 @@ public class CarController {
             model.addAttribute("carModels", carModels);
             model.addAttribute("styles", styles);
             model.addAttribute("years", carService.getYears());
-            return "public/car/detail";
+            String username = securityService.getCurrentUserName();
+            if(username == null || username.equals("anonymousUser")) {
+                return "public/car/detail";
+            } else {
+                return "secured/car/detail";
+            }
         }
         return "public/car/search";
     }
@@ -90,24 +116,15 @@ public class CarController {
         modelAndView.addObject("makes", makes);
         modelAndView.addObject("carModels", carModels);
         modelAndView.addObject("zipCode", zip);
-        modelAndView.setViewName("public/car/search");
+        String username = securityService.getCurrentUserName();
+        if(username == null || username.equals("anonymousUser")) {
+            modelAndView.setViewName("public/car/search");
+        } else {
+            modelAndView.setViewName("secured/car/search");
+        }
         return modelAndView;
     }
-    @GetMapping(value = "/ecarmanagement/car/favorite")
-    public ModelAndView favoriteCars(@RequestParam(defaultValue = "0") int pageno) {
-        ModelAndView modelAndView = new ModelAndView();
-        Page<Car> cars = this.carService.getAllCarsPaged(pageno);
-        modelAndView.addObject("cars", cars);
-        modelAndView.addObject("carsCount", cars.getTotalPages());
-        modelAndView.addObject("currentPageNo", pageno);
-        modelAndView.addObject("now", LocalDate.now());
-        modelAndView.setViewName("secured/car/favorite");
-        return modelAndView;
-    }
-	
-	@Autowired
-	private SecurityService securityService;
-	
+
 	@GetMapping(value = "/ecarmanagement/secured/car/list")
 	public ModelAndView listCars(@RequestParam(defaultValue = "0") int pageno) {
 		ModelAndView modelAndView = new ModelAndView();

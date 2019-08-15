@@ -43,7 +43,10 @@ public class Customer {
     @NotBlank(message = "* Address cannot be empty or blank space(s)")
     private String address;
 
-    
+
+    @ManyToMany
+    private List<Car> savedCars;
+
     //modify start
     @OneToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "userId", nullable = false)
@@ -60,7 +63,7 @@ public class Customer {
     //modify end
 
     public Customer(){
-
+        this.savedCars = new ArrayList<>();
     }
 
     public Customer(@NotNull(message = "* Customer Number is required") String customerNumber, @NotNull(message = "* Name is required")
@@ -74,7 +77,8 @@ public class Customer {
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
-        this.address = address;        
+        this.address = address;
+        this.savedCars = new ArrayList<>();
     }
 
     public Long getCustomerId() {
@@ -145,5 +149,20 @@ public class Customer {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", address='" + address + '\'' +               
                 '}';
+    }
+
+    public List<Car> getSavedCars() {
+        return savedCars;
+    }
+
+    public void setSavedCars(List<Car> savedCars) {
+        this.savedCars = savedCars;
+    }
+
+    public void addFavoriteCar(Car car) {
+        if(this.savedCars == null) {
+            this.savedCars = new ArrayList<>();
+        }
+        this.savedCars.add(car);
     }
 }

@@ -13,8 +13,13 @@ import edu.mum.cs.cs425.finalproject.carmanagement.service.CustomerService;
 public class CustomerServiceImpl implements CustomerService {
 	@Autowired
     private CustomerRepository customerRepository;
-	
-	 @Override
+
+	@Override
+	public Customer saveCustomer(Customer customer) {
+		return customerRepository.save(customer);
+	}
+
+	@Override
 	    public Customer getCustomerByEmail(String email) {
 	        return customerRepository.findCustomerByEmail(email).orElse(null);
 	    }

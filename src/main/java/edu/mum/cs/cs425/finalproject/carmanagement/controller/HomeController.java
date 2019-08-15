@@ -31,7 +31,11 @@ public class HomeController {
     }
 
     @GetMapping(value = {"/ecarmanagement/home"})
-    public String home() {
+    public String home(Model model) {
+        List<Make> makes = makeService.getAllMakes();
+        List<CarModel> carModels = carModelService.getAllCarModels();
+        model.addAttribute("makes", makes);
+        model.addAttribute("carModels", carModels);
         return "public/home/home";
     }
 

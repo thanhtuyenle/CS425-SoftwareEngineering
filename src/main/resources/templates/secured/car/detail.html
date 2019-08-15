@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/master-layout}">
+      layout:decorate="~{layouts/auth-master-layout}">
 <head>
     <title>eCMS - Search Cars for Sale</title>
 </head>
@@ -19,7 +19,7 @@
         <h3 class="card-header"><span th:text="${car.condition.conditionName} + ' ' + ${car.make.makeName} + ' ' + ${car.carModel.carModelName} + ${car.year}"></span></h3>
         <div class="card-body">
             <h5 class="card-title">Sale price: <span th:text="${#numbers.formatCurrency(car.price)}"></span></h5>
-            <h6 class="card-subtitle text-muted">Dealer: <span ></span></h6>
+<!--            <h6 class="card-subtitle text-muted">Dealer: <span ></span></h6>-->
         </div>
         <img th:src="${car.imagePath}" alt="Car Image" style="height:auto; width:300px;"/>
         <div class="card-body">
@@ -35,11 +35,11 @@
         </ul>
         <div class="card-body">
             <a th:href="@{'/ecarmanagement/secured/car/save/' + ${car.carId}}"
-               sec:authorize="hasRole('ROLE_USER')" class="card-link"><span class="fa fa-heart" >Save car</span></a>
+               sec:authorize="hasRole('ROLE_USER')" class="card-link" ><span class="fa fa-heart" >Save car</span></a>
 <!--            <a href="#" class="card-link">View detail</a>-->
         </div>
         <div class="card-footer text-muted">
-            Uploaded <span th:text="${car.uploadDate}"></span>
+<!--            Dealer <span th:text="${car.}"></span>-->
         </div>
     </div>
 </th:block>

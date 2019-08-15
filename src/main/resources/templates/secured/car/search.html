@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/master-layout}">
+      layout:decorate="~{layouts/auth-master-layout}">
 <head>
     <title>eCMS - Search Cars for Sale</title>
 </head>
@@ -94,11 +94,7 @@
     </div>
     <h5> Found <span th:text="${searchResultTotal}"></span> results</h5>
     <div class="card border-dark mb-3"  th:each="car : ${cars}">
-        <div class="card-header">
-<!--            <a th:href="@{'/ecarmanagement/car/detail/{carId}'(carId=${car.carId})}">-->
-                <span th:text="${car.condition.conditionName} + ' ' + ${car.make.makeName} + ' ' + ${car.carModel.carModelName} + ${car.year}"></span>
-<!--            </a>-->
-        </div>
+        <div class="card-header"><a th:href="@{'/ecarmanagement/car/detail/{carId}'(carId=${car.carId})}"><span th:text="${car.condition.conditionName} + ' ' + ${car.make.makeName} + ' ' + ${car.carModel.carModelName} + ${car.year}"></span></a></div>
         <div class="card-body">
             <h4 class="card-title"> Sale at price <span th:text="${#numbers.formatCurrency(car.price)}"></span></h4>
             <p class="card-text">
@@ -112,7 +108,7 @@
                 <li class="list-group-item">Condition: <span th:text="${car.condition.conditionName}"></span></li>
                 <li class="list-group-item">Year: <span th:text="${car.year}"></span></li>
                 <li class="list-group-item">Mileage: <span th:text="${car.mileage}"></span></li>
-<!--                <li class="list-group-item">Uploaded on: <span th:text="${car.uploadDate}"></span></li>-->
+                <li class="list-group-item">Uploaded on: <span th:text="${car.uploadDate}"></span></li>
             </ul>
             <!--            <div class="row">-->
             <!--                <div class="col-sm-4">-->
