@@ -60,7 +60,7 @@
 <!--            <span class="fa fa-user icon-user"></span>-->
 <!--            <a style="color: #ffffff; margin-right: 0em;" class="nav-link" href="#">John Doe</a>-->
             <span style="color:#fff;">Welcome, </span><span sec:authentication="principal.username" style="color:#fff;border-right: white 0px solid; padding-left: 1em; padding-right: 1em;">Guest</span>
-<!--            <a sec:authorize="isAuthenticated()" href="/ecarmanagement/logout" class="btn btn-secondary">Sign out</a>-->
+            <a sec:authorize="isAuthenticated()" href="/ecarmanagement/logout" class="btn btn-secondary">Sign out</a>
         </form>
     </div>
 </nav>
