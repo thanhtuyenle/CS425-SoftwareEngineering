@@ -55,6 +55,10 @@ public class Car {
 	@JoinColumn(name = "condition_id", nullable = false)
 	private Condition condition;
 	
+	@ManyToOne
+	@JoinColumn(name = "dealer_id", nullable = false)
+	private Dealer dealer;
+	
 	public Car() {
 		
 	}
@@ -150,6 +154,16 @@ public class Car {
 	public void setCondition(Condition condition) {
 		this.condition = condition;
 	}
+
+	public Dealer getDealer() {
+		return dealer;
+	}
+
+	public void setDealer(Dealer dealer) {
+		this.dealer = dealer;
+	}
+	
+	
 
 
 	public String getZipCode() {

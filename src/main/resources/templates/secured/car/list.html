@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/master-layout}">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorate="~{layouts/auth-master-layout}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,6 +42,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Image</th> 
+                    <th sec:authorize="hasRole('ROLE_ADMIN')" scope="col">Dealer</th>
                     <th scope="col">Make</th>
                     <th scope="col">Model</th>
                     <th scope="col">Style</th>
@@ -57,6 +59,7 @@
                     
                     <th scope="row" th:text="${iterStat.count}"></th>
                     <td><img th:src="${car.imagePath}" alt="Car Image" style="width:100px; height:auto;"></td>
+                    <td sec:authorize="hasRole('ROLE_ADMIN')" th:text="${car.dealer.dealerNumber} + '-' + ${car.dealer.email}"></td>
                     <td th:text="${car.make.makeName}"></td>
                     <td th:text="${car.carModel.carModelName}"></td>
                     <td th:text="${car.style.styleName}"></td>

@@ -25,11 +25,29 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 
+import edu.mum.cs.cs425.finalproject.carmanagement.model.Car;
+import edu.mum.cs.cs425.finalproject.carmanagement.model.Condition;
+import edu.mum.cs.cs425.finalproject.carmanagement.model.Dealer;
+import edu.mum.cs.cs425.finalproject.carmanagement.model.Make;
+import edu.mum.cs.cs425.finalproject.carmanagement.model.CarModel;
+import edu.mum.cs.cs425.finalproject.carmanagement.model.Style;
+import edu.mum.cs.cs425.finalproject.carmanagement.service.CarService;
+import edu.mum.cs.cs425.finalproject.carmanagement.service.ConditionService;
+import edu.mum.cs.cs425.finalproject.carmanagement.service.IDealerService;
+import edu.mum.cs.cs425.finalproject.carmanagement.service.MakeService;
+import edu.mum.cs.cs425.finalproject.carmanagement.service.SecurityService;
+import edu.mum.cs.cs425.finalproject.carmanagement.service.CarModelService;
+import edu.mum.cs.cs425.finalproject.carmanagement.service.StyleService;
+
+
 @Controller
 public class CarController {
 	
 	@Autowired 
 	private CarService carService;
+	
+	@Autowired 
+	private IDealerService dealerService;
 	
 	@Autowired 
 	private ConditionService conditionService;
@@ -128,7 +146,15 @@ public class CarController {
 	@GetMapping(value = "/ecarmanagement/secured/car/list")
 	public ModelAndView listCars(@RequestParam(defaultValue = "0") int pageno) {
 		ModelAndView modelAndView = new ModelAndView();
-		Page<Car> cars = this.carService.getAllCarsPaged(pageno);		
+		Page<Car> cars = null;
+		if(securityService.isAdmin())
+			cars = this.carService.getAllCarsPaged(pageno);
+		else if(securityService.isDealer()) {
+			String userName = securityService.getCurrentUserName();
+			Dealer dealer = securityService.getDealerByUserName(userName);
+			cars = this.carService.getAllCarsPagedByDealer(pageno, dealer);
+		}
+			
         modelAndView.addObject("cars", cars);        
         modelAndView.addObject("carsCount", cars.getTotalPages());        
         modelAndView.addObject("currentPageNo", pageno); 
@@ -145,7 +171,9 @@ public class CarController {
         List<Make> makes = makeService.getAllMakes();
         List<CarModel> carModels = carModelService.getAllCarModels();
         List<Style> styles = styleService.getAllStyles();
+        List<Dealer> dealers = dealerService.getAllDealers();
         model.addAttribute("car", new Car());
+        model.addAttribute("dealers", dealers);  
         model.addAttribute("conditions", conditions);  
         model.addAttribute("makes", makes);  
         model.addAttribute("carModels", carModels);  
@@ -164,10 +192,12 @@ public class CarController {
                                      BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());
+            List<Dealer> dealers = dealerService.getAllDealers();
             List<Condition> conditions = conditionService.getAllConditions();
             List<Make> makes = makeService.getAllMakes();
             List<CarModel> carModels = carModelService.getAllCarModels();
-            List<Style> styles = styleService.getAllStyles();            
+            List<Style> styles = styleService.getAllStyles();
+            model.addAttribute("dealers", dealers);  
             model.addAttribute("conditions", conditions);  
             model.addAttribute("makes", makes);  
             model.addAttribute("carModels", carModels);  
@@ -179,6 +209,12 @@ public class CarController {
 		String imgPath = doUpload(request, carImg);
 		if(imgPath != null)
 			car.setImagePath(imgPath);
+		
+		if(securityService.isDealer()) {
+			String userName = securityService.getCurrentUserName();
+			Dealer dealer = securityService.getDealerByUserName(userName);
+			car.setDealer(dealer);
+		}
         carService.saveCar(car);
         return "redirect:/ecarmanagement/secured/car/list";
     }
@@ -188,10 +224,12 @@ public class CarController {
         Car car = carService.getCarById(carId);
         if (car != null) {
         	model.addAttribute("car", car);
+        	List<Dealer> dealers = dealerService.getAllDealers();
         	List<Condition> conditions = conditionService.getAllConditions();
             List<Make> makes = makeService.getAllMakes();
             List<CarModel> carModels = carModelService.getAllCarModels();
-            List<Style> styles = styleService.getAllStyles();            
+            List<Style> styles = styleService.getAllStyles();
+            model.addAttribute("dealers", dealers);  
             model.addAttribute("conditions", conditions);  
             model.addAttribute("makes", makes);  
             model.addAttribute("carModels", carModels);  
@@ -203,14 +241,16 @@ public class CarController {
     }
 
     @PostMapping(value = {"/ecarmanagement/secured/car/edit"})
-    public String updateCar(@Valid @ModelAttribute("car") Car car,
+    public String updateCar(HttpServletRequest request, @RequestParam("carImg") MultipartFile carImg, @Valid @ModelAttribute("car") Car car,
                                 BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
         	model.addAttribute("errors", bindingResult.getAllErrors());
+        	List<Dealer> dealers = dealerService.getAllDealers();
         	List<Condition> conditions = conditionService.getAllConditions();
             List<Make> makes = makeService.getAllMakes();
             List<CarModel> carModels = carModelService.getAllCarModels();
-            List<Style> styles = styleService.getAllStyles();            
+            List<Style> styles = styleService.getAllStyles(); 
+            model.addAttribute("dealers", dealers); 
             model.addAttribute("conditions", conditions);  
             model.addAttribute("makes", makes);  
             model.addAttribute("carModels", carModels);  
@@ -218,6 +258,16 @@ public class CarController {
             model.addAttribute("years", carService.getYears());
             return "secured/car/edit";
         }
+        String imgPath = doUpload(request, carImg);
+		if(imgPath != null)
+			car.setImagePath(imgPath);
+		
+        if(securityService.isDealer()) {
+			String userName = securityService.getCurrentUserName();
+			Dealer dealer = securityService.getDealerByUserName(userName);
+			car.setDealer(dealer);
+		}
+        
         car = carService.saveCar(car);
         return "redirect:/ecarmanagement/secured/car/list";
     }
