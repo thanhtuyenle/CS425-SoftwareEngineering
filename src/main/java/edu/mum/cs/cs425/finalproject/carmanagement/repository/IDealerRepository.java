@@ -12,6 +12,7 @@ import java.util.Optional;
 @Repository
 public interface IDealerRepository extends JpaRepository<Dealer, Long> {
     Optional<Dealer> findDealerByDealerNumber(String dealerNumber);
+    Optional<Dealer> findDealerByEmail(String email);
 
     Page<Dealer> findAllByDealerNumberContainingOrNameContainingOrAddressContainingOrWebsiteContainingOrPhoneNumberContainingOrEmailContaining
             (String dealerNumber, String name, String address, String website, String phoneNumber, String email, Pageable pageable);

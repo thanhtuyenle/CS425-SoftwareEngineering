@@ -14,6 +14,7 @@ public interface IDealerService {
     public abstract Dealer registerNewDealer(Dealer dealer);
 
     public abstract Dealer getDealerById(Long dealerId);
+    public abstract Dealer getDealerByEmail(String email);
     public abstract Dealer saveDealer(Dealer dealer);
 
     public abstract void deleteDealerById(Long dealerId);
