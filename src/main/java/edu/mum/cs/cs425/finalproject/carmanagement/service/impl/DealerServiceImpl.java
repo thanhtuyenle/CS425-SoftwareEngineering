@@ -71,6 +71,11 @@ public class DealerServiceImpl implements IDealerService {
     public Dealer getDealerById(Long dealerId) {
         return dealerRepository.findById(dealerId).orElse(null);
     }
+    
+    @Override
+    public Dealer getDealerByEmail(String email) {
+        return dealerRepository.findDealerByEmail(email).orElse(null);
+    }
 
     @Override
     public Dealer saveDealer(Dealer dealer) {

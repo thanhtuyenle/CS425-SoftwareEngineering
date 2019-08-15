@@ -31,6 +31,7 @@ import edu.mum.cs.cs425.finalproject.carmanagement.model.Style;
 import edu.mum.cs.cs425.finalproject.carmanagement.service.CarService;
 import edu.mum.cs.cs425.finalproject.carmanagement.service.ConditionService;
 import edu.mum.cs.cs425.finalproject.carmanagement.service.MakeService;
+import edu.mum.cs.cs425.finalproject.carmanagement.service.SecurityService;
 import edu.mum.cs.cs425.finalproject.carmanagement.service.CarModelService;
 import edu.mum.cs.cs425.finalproject.carmanagement.service.StyleService;
 
@@ -53,6 +54,9 @@ public class CarController {
 	@Autowired 
 	private StyleService styleService;
 	
+	@Autowired
+	private SecurityService securityService;
+	
 	@GetMapping(value = "/ecarmanagement/secured/car/list")
 	public ModelAndView listCars(@RequestParam(defaultValue = "0") int pageno) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -62,6 +66,8 @@ public class CarController {
         modelAndView.addObject("currentPageNo", pageno); 
         modelAndView.addObject("now", LocalDate.now());
         modelAndView.setViewName("secured/car/list");
+        
+        boolean isDealer = securityService.isDealer();
         return modelAndView;
 	}
 	
