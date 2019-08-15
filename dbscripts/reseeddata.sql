@@ -1,23 +1,15 @@
-CREATE SCHEMA `carmanagementdb` ;
 
-DROP TABLE `carmanagementdb`.`users_roles`;
-
-DROP TABLE `carmanagementdb`.`roles`;
-
-DROP TABLE `carmanagementdb`.`dealers`;
-
-DROP TABLE `carmanagementdb`.`users`;
 
 
 -- Table users --
-INSERT INTO `carmanagementdb`.`users` (`email`, `firstname`, `lastname`, `middlename`, `password`,`username`)
+INSERT INTO carmanagementdb.`users` (email, firstname, lastname, middlename, password,`username`)
 VALUES ('admin@mum.edu', 'admin', 'admin', 'admin', '$2a$10$wOvHq0PgfWoYBuMnd4GVcOAcL7Bx43jxnwtLL8fR8YqMKCI.KPkoa', 'admin@mum.edu');
 
-INSERT INTO `carmanagementdb`.`users` (`email`, `firstname`, `lastname`, `middlename`, `password`,`username`) 
-VALUES ('admin@mum.edu', 'admin', 'admin', 'admin', '$2a$10$wOvHq0PgfWoYBuMnd4GVcOAcL7Bx43jxnwtLL8fR8YqMKCI.KPkoa', 'admin@mum.edu');
-
-INSERT INTO `carmanagementdb`.`users` (`email`, `firstname`, `lastname`, `middlename`, `password`,`username`) 
+INSERT INTO carmanagementdb.`users` (email, firstname, lastname, middlename, password,`username`) 
 VALUES ('dealer@mum.edu', 'dealer', 'dealer', 'dealer', '$2a$10$AgYzpl40rMUXwG2mIj2pKeJwBwxzrKOhb0vPvooR2IbxGjDRWrKYq', 'dealer@mum.edu');
+
+INSERT INTO carmanagementdb.`users` (email, firstname, lastname, middlename, password,`username`)
+VALUES ('user@mum.edu', 'user', 'user', 'user', '$2a$10$IWwUPPV5cPJyeMwQ0VL2QedTH9uDwcz05ZGCeO.RXCxgHEsBFqYDS', 'user@mum.edu');
 
 -- Table roles --
 INSERT INTO `carmanagementdb`.`roles` (`id`, `name`) VALUES ('1', 'ROLE_ADMIN');
@@ -73,7 +65,7 @@ VALUES ('20 Highway St., Fairfield', 'DL005', 'highway@mum.edu', 'Highway Store'
 INSERT INTO `carmanagementdb`.`dealers` (`address`, `dealer_number`, `email`, `name`, `password`, `phone_number`, `website`, `user_id`)
 VALUES ('10 Billards St., Fairfield', 'DL006', 'billards@mum.edu', 'Billards Store', 'dealer1234', '(641) 5555 4444', 'www.billards.com', '9');
 
---Customer
+-- Customer
 INSERT INTO `carmanagementdb`.`customers` (`address`, `customer_number`, `email`, `name`, `password`, `phone_number`, `user_id`)
 VALUES ('2 New Jersey', 'CUS001', 'peter@mum.edu', 'Peter Store', 'test1234', '(641) 5555 9999', '10');
 
