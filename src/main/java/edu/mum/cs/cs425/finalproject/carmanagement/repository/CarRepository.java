@@ -12,5 +12,10 @@ import java.util.Optional;
 
 @Repository
 public interface CarRepository extends JpaRepository<Car, Long>{
-    List<Car> findAllByMakeAndCarModel(Make make, CarModel model);
+//    List<Car> findAllByMakeAndCarModel(Make make, CarModel model);
+    List<Car> findAllByMake(Make make);
+    List<Car> findAllByCarModel(CarModel model);
+
+    List<Car> findCarsByZipCodeOrMakeOrCarModel(String zipcode, Make make, CarModel model);
+    List<Car> findAllByZipCode(String zipCode);
 }

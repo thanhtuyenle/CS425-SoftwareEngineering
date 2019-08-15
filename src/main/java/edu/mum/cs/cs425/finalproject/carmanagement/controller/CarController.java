@@ -53,29 +53,54 @@ public class CarController {
 	@Autowired 
 	private StyleService styleService;
 
-    @GetMapping(value = "/ecarmanagement/car/detail")
-    public ModelAndView viewCarDetail(@RequestParam(defaultValue = "0") int pageno) {
+    @GetMapping(value = "/ecarmanagement/car/detail/{carId}")
+    public String viewCarDetail(@PathVariable Long carId, Model model) {
+        Car car = carService.getCarById(carId);
+        if (car != null) {
+            model.addAttribute("car", car);
+            List<Condition> conditions = conditionService.getAllConditions();
+            List<Make> makes = makeService.getAllMakes();
+            List<CarModel> carModels = carModelService.getAllCarModels();
+            List<Style> styles = styleService.getAllStyles();
+            model.addAttribute("conditions", conditions);
+            model.addAttribute("makes", makes);
+            model.addAttribute("carModels", carModels);
+            model.addAttribute("styles", styles);
+            model.addAttribute("years", carService.getYears());
+            return "public/car/detail";
+        }
+        return "public/car/search";
+    }
+
+    @GetMapping(value = "/ecarmanagement/car/search")
+    public ModelAndView searchCars(@RequestParam(defaultValue = "0") int makeCode,
+                                   @RequestParam(defaultValue = "0") int modelCode,
+                                   @RequestParam(defaultValue = "") String zip) {
+        ModelAndView modelAndView = new ModelAndView();
+        Make make = this.makeService.findMakeById(makeCode);
+        CarModel model = this.carModelService.findCarModelById(modelCode);
+        List<Car> cars = this.carService.searchCars(make, model, zip);
+        List<Make> makes = makeService.getAllMakes();
+        List<CarModel> carModels = carModelService.getAllCarModels();
+        modelAndView.addObject("cars", cars);
+        modelAndView.addObject("searchResultTotal", cars.size());
+        modelAndView.addObject("makeCode", make);
+        modelAndView.addObject("modelCode", model);
+        modelAndView.addObject("makes", makes);
+        modelAndView.addObject("carModels", carModels);
+        modelAndView.addObject("zipCode", zip);
+        modelAndView.setViewName("public/car/search");
+        return modelAndView;
+    }
+    @GetMapping(value = "/ecarmanagement/car/favorite")
+    public ModelAndView favoriteCars(@RequestParam(defaultValue = "0") int pageno) {
         ModelAndView modelAndView = new ModelAndView();
         Page<Car> cars = this.carService.getAllCarsPaged(pageno);
         modelAndView.addObject("cars", cars);
         modelAndView.addObject("carsCount", cars.getTotalPages());
         modelAndView.addObject("currentPageNo", pageno);
         modelAndView.addObject("now", LocalDate.now());
-        modelAndView.setViewName("public/car/detail");
-        return modelAndView;
-    }
-    @GetMapping(value = "/ecarmanagement/car/search")
-    public ModelAndView searchCars(@RequestParam(defaultValue = "") int makeCode,
-                                   @RequestParam(defaultValue = "") int modelCode,
-                                   @RequestParam(defaultValue = "") String zip) {
-        ModelAndView modelAndView = new ModelAndView();
-        Make make = this.makeService.findMakeById(makeCode);
-        CarModel model = this.carModelService.findCarModelById(modelCode);
-        List<Car> cars = this.carService.searchCars(make, model, zip);
-        modelAndView.addObject("cars", cars);
-        modelAndView.addObject("make", make);
-        modelAndView.addObject("model", model);
-        modelAndView.setViewName("public/car/search");
+        modelAndView.setViewName("secured/car/favorite");
         return modelAndView;
     }
 	@GetMapping(value = "/ecarmanagement/car/list")

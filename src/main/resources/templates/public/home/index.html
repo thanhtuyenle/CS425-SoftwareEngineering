@@ -22,7 +22,7 @@
                                         aria-label="makeCodeListPlaceHolder"
                                 >
                                     <option selected="" value="">Any Make</option>
-                                    <option th:each="make : ${makes}" th:value="${make.Id}" th:text="${make.makeName}"></option>
+                                    <option th:each="make : ${makes}" th:value="${make.makeId}" th:text="${make.makeName}"></option>
 
 <!--                                    <optgroup label="Popular Makes">-->
 <!--                                        <option value="ACURA">Acura</option>-->
@@ -51,7 +51,7 @@
                                         id="modelCodeListPlaceHolder"
                                         aria-label="modelCodeListPlaceHolder" >
                                     <option selected="" value="">Any Model</option>
-                                    <option th:each="carModel : ${carModels}" th:value="${carModel.Id}" th:text="${carModel.carModelName}"></option>
+                                    <option th:each="carModel : ${carModels}" th:value="${carModel.carModelId}" th:text="${carModel.carModelName}"></option>
 
                                     <!--                                    <optgroup label="Popular Models">-->
 <!--                                        <option value="ACCORD">Accord</option>-->
@@ -73,7 +73,8 @@
                         </div>
                         <div class="col-search-bar">
                             <div class="form-group">
-                                <input type="tel" name="zip"
+                                <input type="text" name="zip"
+                                       pattern="\d{5}"
                                        placeholder="ZIP Code" required="" class="form-control" value="52557"
                                        aria-label="ZIP Code" />
                             </div>

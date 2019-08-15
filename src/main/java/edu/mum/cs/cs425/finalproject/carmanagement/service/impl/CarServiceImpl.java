@@ -31,7 +31,7 @@ public class CarServiceImpl implements CarService {
 	@Override
 	public List<Car> searchCars(Make make, CarModel model, String zipcode) {
 
-		return repository.findAllByMakeAndCarModel(make, model);
+		return repository.findCarsByZipCodeOrMakeOrCarModel(zipcode, make, model);
 	}
 
 	@Override

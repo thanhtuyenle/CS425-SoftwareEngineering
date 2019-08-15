@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "cars")
@@ -36,6 +37,7 @@ public class Car {
 	private String imagePath;
 
 	private String zipCode;
+	private LocalDate uploadDate;
 	
 	@ManyToOne
 	@JoinColumn(name = "make_id", nullable = false)
@@ -61,7 +63,7 @@ public class Car {
 			@NotNull(message = "* Price is required") double price,
 			@NotNull(message = "* Mileage is required") long mileage,
 			@NotBlank(message = "* Image path is required") String imagePath, Make make, CarModel carModel, Style style,
-			Condition condition) {
+			Condition condition, String zipCode) {
 		super();
 		this.year = year;
 		this.price = price;
@@ -71,6 +73,8 @@ public class Car {
 		this.carModel = carModel;
 		this.style = style;
 		this.condition = condition;
+		this.zipCode = zipCode;
+		this.uploadDate = LocalDate.now();
 	}
 
 	
@@ -146,7 +150,21 @@ public class Car {
 	public void setCondition(Condition condition) {
 		this.condition = condition;
 	}
-	
-	
 
+
+	public String getZipCode() {
+		return zipCode;
+	}
+
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+	}
+
+	public LocalDate getUploadDate() {
+		return uploadDate;
+	}
+
+	public void setUploadDate(LocalDate uploadDate) {
+		this.uploadDate = uploadDate;
+	}
 }
