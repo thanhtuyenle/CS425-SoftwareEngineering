@@ -20,4 +20,5 @@ public interface CarService {
 	
 	public abstract void deleteCarById(Long carId);
 //	public abstract Optional<Citizen> findByCitizenNumber(Long productNumber);	
+	public abstract List<Integer> getYears();
 }

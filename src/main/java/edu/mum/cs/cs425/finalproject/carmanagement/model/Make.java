@@ -36,11 +36,14 @@ public class Make {
 		this.makeName = makeName;
 		this.carModels = carModels;
 	}
-	public int getId() {
+	
+	
+	
+	public int getMakeId() {
 		return makeId;
 	}
-	public void setId(int id) {
-		makeId = id;
+	public void setMakeId(int makeId) {
+		this.makeId = makeId;
 	}
 	public String getMakeName() {
 		return makeName;

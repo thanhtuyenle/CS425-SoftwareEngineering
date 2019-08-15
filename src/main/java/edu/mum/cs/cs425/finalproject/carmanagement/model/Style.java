@@ -14,7 +14,7 @@ public class Style {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int Id;
+	private int styleId;
 	
 	@NotBlank(message = "* Style is required")
 	@Column(nullable = false, unique = true)
@@ -27,11 +27,13 @@ public class Style {
 		super();
 		this.styleName = styleName;
 	}
-	public int getId() {
-		return Id;
+	
+	
+	public int getStyleId() {
+		return styleId;
 	}
-	public void setId(int id) {
-		Id = id;
+	public void setStyleId(int styleId) {
+		this.styleId = styleId;
 	}
 	public String getStyleName() {
 		return styleName;

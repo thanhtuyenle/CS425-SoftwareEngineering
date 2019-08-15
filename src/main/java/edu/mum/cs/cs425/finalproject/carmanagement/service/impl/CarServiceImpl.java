@@ -2,7 +2,9 @@ package edu.mum.cs.cs425.finalproject.carmanagement.service.impl;
 
 import edu.mum.cs.cs425.finalproject.carmanagement.model.CarModel;
 import edu.mum.cs.cs425.finalproject.carmanagement.model.Make;
-import edu.mum.cs.cs425.finalproject.carmanagement.repository.MakeRepository;
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,7 +22,7 @@ import java.util.List;
 @Service
 public class CarServiceImpl implements CarService {
 	
-	public static Integer NUM_EACH_PAGE = 10;
+	public static Integer NUM_EACH_PAGE = 5;
 	public static String ORDER_BY_COLUMN_NAME = "year";
 
 	@Autowired
@@ -50,5 +52,14 @@ public class CarServiceImpl implements CarService {
 	@Override
 	public void deleteCarById(Long carId) {
 		repository.deleteById(carId);		
+	}
+	
+	@Override
+	public List<Integer> getYears(){
+		List<Integer> years = new ArrayList();
+		for(int i = 1990; i < LocalDate.now().getYear() + 1; i ++) 
+			years.add(i);
+		
+		return years;
 	}
 }
