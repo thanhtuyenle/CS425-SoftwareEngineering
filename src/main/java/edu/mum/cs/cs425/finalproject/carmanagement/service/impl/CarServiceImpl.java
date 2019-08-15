@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 
 import edu.mum.cs.cs425.finalproject.carmanagement.model.Car;
+import edu.mum.cs.cs425.finalproject.carmanagement.model.Dealer;
 import edu.mum.cs.cs425.finalproject.carmanagement.repository.CarRepository;
 import edu.mum.cs.cs425.finalproject.carmanagement.service.CarService;
 
@@ -30,6 +31,12 @@ public class CarServiceImpl implements CarService {
 	public Page<Car> getAllCarsPaged(int pageNo) {
 		return repository.findAll(PageRequest.of(pageNo, NUM_EACH_PAGE, Sort.by(ORDER_BY_COLUMN_NAME)));
 	}
+	
+	@Override
+	public Page<Car> getAllCarsPagedByDealer(int pageNo, Dealer dealer) {
+		return repository.findAllByDealer(dealer, PageRequest.of(pageNo, NUM_EACH_PAGE, Sort.by(ORDER_BY_COLUMN_NAME)));
+	}
+	
 
 	@Override
 	public Car saveCar(Car car) {

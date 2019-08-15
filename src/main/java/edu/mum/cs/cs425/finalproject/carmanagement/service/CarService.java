@@ -5,11 +5,13 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 
 import edu.mum.cs.cs425.finalproject.carmanagement.model.Car;
+import edu.mum.cs.cs425.finalproject.carmanagement.model.Dealer;
 
 public interface CarService {
 
 //	public abstract List<Citizen> getAllCitizens();
 	public abstract Page<Car> getAllCarsPaged(int pageNo);
+	public abstract Page<Car> getAllCarsPagedByDealer(int pageNo, Dealer dealer);
 	public abstract Car saveCar(Car car);
 //	public abstract Double getTotalYearlyIncome();
 	

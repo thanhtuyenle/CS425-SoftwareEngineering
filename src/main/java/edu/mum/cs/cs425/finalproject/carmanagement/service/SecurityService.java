@@ -9,7 +9,7 @@ public interface SecurityService {
 	
 	public abstract String getCurrentUserName();
 	
-//	public abstract boolean isAdmin();
+	public abstract boolean isAdmin();
 	public abstract boolean isDealer();
 	public abstract boolean isCustomer();
 	

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/master-layout}">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorate="~{layouts/auth-master-layout}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +25,19 @@
             <input type="hidden" th:attr="name=${_csrf.parameterName},value=${_csrf.token}"/>
             <fieldset>
                 <input type="hidden" name="carId" th:value="${car.carId}"/>
-                
+                <div sec:authorize="hasRole('ROLE_ADMIN')" class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+		                    <label for="make">Dealer:</label>
+		                    <span th:if="${#fields.hasErrors('dealer')}" th:errors="*{dealer}"
+		                          class="alert alert-danger"></span>
+		                    <select name="dealer" id="dealer" class="form-control" required="required" autofocus>
+		                        <option value="">Select a dealer</option>
+		                        <option th:each="dealer : ${dealers}" th:value="${dealer.dealerId}" th:text="${dealer.dealerNumber} + '-' + ${dealer.email}"></option>
+		                    </select>
+		                </div>
+                    </div> 
+                </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">

@@ -42,6 +42,23 @@ public class SecurityServiceImpl implements SecurityService{
 		}
 		return username;
 	}
+	
+	@Override
+	public boolean isAdmin() {
+		String userName = getCurrentUserName();
+		Optional<User> user = userRepository.findByUsername(userName);
+		
+		boolean isAdmin = false;
+		if(user.isPresent()) {
+			String[] userRoles = user.get().getRoles().stream().map((role) -> role.getName()).toArray(String[]::new);
+			for(String role: userRoles) {
+				if(role.compareTo(ROLE_ADMIN) == 0)
+					return true;				
+			}			
+		}
+		
+		return isAdmin;
+	}
 
 	@Override
 	public boolean isDealer() {
